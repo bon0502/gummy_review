@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@layer components {
+  .top-wrapper {
+    background-image: url('DE5961DC-0CB4-4298-9932-D6BFA88A8596.jpeg');
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+  }
+}
