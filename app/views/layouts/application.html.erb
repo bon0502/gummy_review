@@ -6,14 +6,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
-  <body>
+  <body class="min-h-screen flex flex-col">
     <%= render "shared/header" %>
-    <main class="container mx-auto mt-6">
+    <main>
       <%= yield %>
     </main>
     <%= render "shared/footer" %>
