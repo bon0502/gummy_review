@@ -8,6 +8,7 @@ gem "rails", "~> 7.0.8", ">= 7.0.8.7"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
+gem 'psych', '~> 5.0'
 
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", "~> 1.4"
@@ -44,7 +45,6 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 # Use Sass to process CSS
-gem "sassc-rails"
 
 # Use Tailwind CSS
 gem "tailwindcss-rails"
