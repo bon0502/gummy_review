@@ -1,17 +1,17 @@
-<header class="bg-pink-200 p-4">
-  <div class="container mx-auto flex justify-between items-center">
+<header class="header">
+  <div class="header-container">
     <!-- ロゴ -->
-    <h1 class="text-xl font-bold">
+    <h1 class="header-logo">
       <%= link_to "Gummy Review", root_path %>
     </h1>
     <!-- ナビゲーション -->
-    <nav class="space-x-4">
-      <%= link_to "グミ一覧", "#", class: "hover:underline" %>
-      <%= link_to "投稿する", "#", class: "hover:underline" %>
-      <%= link_to "マイページ", "#", class: "hover:underline" %>
-      <%= link_to "ログアウト", "#", data: { turbo_method: :delete }, class: "hover:underline" %>
-      <%= link_to "ログイン", "#", class: "hover:underline" %>
-      <%= link_to "新規登録", "#", class: "hover:underline" %>
+    <nav class="header-nav">
+      <%= link_to "グミ一覧", "#" %>
+      <%= link_to "投稿する", "#" %>
+      <%= link_to "マイページ", "#" %>
+      <%= link_to "ログアウト", "#", data: { turbo_method: :delete } %>
+      <%= link_to "ログイン", "#" %>
+      <%= link_to "新規登録", "#" %>
     </nav>
   </div>
 </header>
