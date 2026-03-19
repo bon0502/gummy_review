@@ -1,7 +1,14 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+
 .top-wrapper {
   background-image: url('DE5961DC-0CB4-4298-9932-D6BFA88A8596.jpeg');
   height: 500px;
-  padding-top: 60px;
+  padding-top: 100px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 .top-container {
@@ -40,7 +47,7 @@
 }
 
 .header {
-  background-color: #f3c4d5; /* ピンク色 */
+  background-color: #9ee9fa;
   padding: 1rem;
 }
 
@@ -55,7 +62,7 @@
 }
 
 .footer {
-  background-color: #f9d1df; /* ピンク色 */
+  background-color: #9ee9fa;
   padding: 1rem;
   text-align: center;
 }
@@ -64,8 +71,29 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #e3baf8;
 }
 
 main {
   flex: 1;
+}
+
+main.top-page {
+  flex: initial;  /* トップページだけ解除 */
+}
+
+.user-registration-form .form-control {
+  width: 50%;
+  margin: auto;
+}
+
+.user-registration-form .form-label {
+  width: 50%;
+  margin: auto;
+  display: block;
+}
+
+.btn-pink {
+  background-color: #fa61ae;
+  color: white;
 }
