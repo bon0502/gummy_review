@@ -9,9 +9,9 @@
       <%= link_to "グミ一覧", "#" %>
       <%= link_to "投稿する", "#" %>
       <%= link_to "マイページ", "#" %>
-      <%= link_to "ログアウト", "#", data: { turbo_method: :delete } %>
-      <%= link_to "ログイン", "#" %>
-      <%= link_to "新規登録", "#" %>
+      <%= link_to "ログアウト", logout_path, data: { turbo_method: :delete } %>
+      <%= link_to "ログイン", login_path %>
+      <%= link_to "新規登録", new_user_path %>
     </nav>
   </div>
 </header>

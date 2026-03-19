@@ -18,5 +18,4 @@ test:
   database: gummy_review_test
 
 production:
-  <<: *default
-  database: gummy_review_production
+  url: <%= ENV.fetch("DATABASE_URL") %>
