@@ -1,0 +1,25 @@
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <h1 class="mb-4">グミ一覧</h1>
+    </div>
+  </div>
+  <div class="row">
+    <% @gummies.each do |gummy| %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <%= image_tag gummy.photo_url, class: "card-img-top", alt: gummy.name %>
+          <div class="card-body">
+            <h5 class="card-title text-center"><%= gummy.name %></h5>
+            <p class="card-text text-center">総合評価：<%= display_star_rating(gummy.overall_rating) %></p>
+            <p class="card-text">💚メーカー：<%= gummy.maker.name %></p>
+            <p class="card-text">🩵フレーバー：<%= gummy.flavors.map(&:name).join(", ") %></p>
+            <p class="card-text">🩷甘さ：<%= gummy.sweetness_label %></p>
+            <p class="card-text">💛酸味：<%= gummy.sourness_label %></p>
+            <p class="card-text">🩶硬さ：<%= gummy.hardness_label %></p>
+          </div>
+         </div>
+       </div>
+    <% end %>
+  </div>
+</div>
