@@ -1,0 +1,62 @@
+<h1 class="title">レビュー投稿</h1>
+
+<%= form_with model: @review, class: "review-form" do |f| %>
+
+  <div class="form-group">
+    <%= f.label :photo_url, "グミ画像（メイン１枚）" %>
+    <%= f.file_field :photo_url %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :main_images, "他のグミたち（複数選択可）" %>
+    <%= f.file_field :main_images, multiple: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gummy_name, "グミの名前" %>
+    <%= f.text_field :gummy_name %>
+  </div>
+
+  <div class="form-group">
+    <label>総合評価</label>
+    <%= f.select :rating, [["⭐️", 1], ["⭐⭐", 2], ["⭐⭐⭐", 3], ["⭐⭐⭐⭐", 4], ["⭐⭐⭐⭐⭐", 5]] %>
+  </div>
+
+  <!-- 横並び -->
+  <div class="row-group">
+    <div>
+      <%= f.label :flavor, "🩵フレーバー🩵" %>
+      <%= f.text_field :flavor %>
+    </div>
+
+    <div>
+      <%= f.label :hardness, "🩶硬さ🩶" %>
+      <%= f.select :hardness, [["とてもソフト", 1], ["ソフト", 2], ["普通", 3], ["ハード", 4], ["とてもハード", 5]] %>
+    </div>
+
+    <div>
+      <%= f.label :sweetness, "🩷甘さ🩷" %>
+      <%= f.select :sweetness, [["甘くない", 1], ["甘さ控えめ", 2], ["甘い", 3], ["少し甘い", 4], ["とても甘い", 5]] %>
+    </div>
+
+    <div>
+      <%= f.label :sourness, "💛酸味💛" %>
+      <%= f.select :sourness, [["酸っぱくない", 1], ["酸っぱさ控えめ", 2], ["酸っぱい", 3], ["少し酸っぱい", 4], ["とても酸っぱい", 5]] %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :manufacturer_name, "💚メーカー💚" %>
+    <%= f.text_field :manufacturer_name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :comment, "⭐グミの特徴⭐" %>
+    <%= f.text_area :comment %>
+  </div>
+
+  <div class="submit-area">
+    <%= f.submit "投稿！" %>
+  </div>
+
+<% end %>
