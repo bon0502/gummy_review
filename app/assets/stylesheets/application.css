@@ -97,3 +97,78 @@ main.top-page {
   background-color: #fa61ae;
   color: white;
 }
+
+/* タイトル */
+.title {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* フォーム全体 */
+.review-form {
+  width: 700px;
+  margin: 0 auto;
+  background: #fcc2ff;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+/* 各入力ブロック */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* ラベル */
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* 入力欄 */
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #888;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* 横並び（ここ重要🔥） */
+.row-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.row-group div {
+  width: 24%;
+  min-width: 150px;  /* 最小幅を設定 */
+  text-align: center;
+}
+
+/* テキストエリア大きめ */
+textarea {
+  height: 150px;
+}
+
+/* ボタン */
+.submit-area {
+  text-align: right;
+}
+
+.submit-area input {
+  background-color: #a3e7ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-area input:hover {
+  background-color: #7fddff;
+}

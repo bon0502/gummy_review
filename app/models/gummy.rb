@@ -4,6 +4,15 @@ class Gummy < ApplicationRecord
   has_many :flavor_gummies, dependent: :destroy
   has_many :flavors, through: :flavor_gummies
 
+  belongs_to :maker
+  attr_accessor :manufacturer_name
+  before_validation :assign_maker
+
+  def assign_maker
+    return if manufacturer_name.blank?
+    self.maker = Maker.find_by(name: manufacturer_name)
+  end
+
   def sweetness_label
     case sweetness
     when 1

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_21_160313) do
+ActiveRecord::Schema[7.0].define(version: 2026_03_23_153721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_21_160313) do
     t.integer "sweetness"
     t.integer "sourness"
     t.integer "hardness"
+    t.string "flavor"
     t.index ["maker_id"], name: "index_gummies_on_maker_id"
   end
 
@@ -51,7 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_21_160313) do
 
   create_table "reviews", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "gummy_id", null: false
     t.integer "rating", null: false
     t.string "purchase_location"
     t.string "photo_url"
@@ -61,7 +61,10 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_21_160313) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["gummy_id"], name: "index_reviews_on_gummy_id"
+    t.string "main_images"
+    t.string "gummy_name"
+    t.string "flavor"
+    t.string "manufacturer_name"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -79,6 +82,5 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_21_160313) do
   add_foreign_key "flavor_gummies", "flavors"
   add_foreign_key "flavor_gummies", "gummies"
   add_foreign_key "gummies", "makers"
-  add_foreign_key "reviews", "gummies"
   add_foreign_key "reviews", "users"
 end
