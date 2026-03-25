@@ -13,23 +13,6 @@ ja:
       login: ログイン
       to_register_page: 登録ページへ
       password_forget: パスワードをお忘れの方はこちら
-  users:
-    new:
-      title: ユーザー登録
-      to_login_page: ログインページへ
-  header:
-    login: ログイン
-    logout: ログアウト
-    review: レビュー
-    review_index: レビュー一覧
-    review_board: レビュー作成
-    profile: プロフィール
-  user_sessions:
-    new:
-      title: ログイン
-      login: ログイン
-      to_register_page: 登録ページへ
-      password_forget: パスワードをお忘れの方はこちら
     create:
       success: ログインしました
       failure: ログインに失敗しました
@@ -42,3 +25,17 @@ ja:
     create:
       success: ユーザー登録が完了しました!
       failure: ユーザー登録に失敗しました
+  header:
+    login: ログイン
+    logout: ログアウト
+    review: レビュー
+    review_index: レビュー一覧
+    review_board: レビュー作成
+    profile: プロフィール
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "&hellip;"

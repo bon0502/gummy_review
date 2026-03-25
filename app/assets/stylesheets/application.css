@@ -59,6 +59,8 @@
 
 .header a {
   text-decoration: none;
+  color: #8b4789;
+  font-weight: bold;
 }
 
 .footer {
@@ -96,6 +98,11 @@ main.top-page {
 .btn-pink {
   background-color: #fa61ae;
   color: white;
+}
+
+.btn-pink:hover {
+  background-color: #fb3d92;  /* ホバー時の色 */
+  color: white;  /* 文字色も明示 */
 }
 
 /* タイトル */
@@ -187,5 +194,10 @@ textarea {
 
 .custom-btn {
   background-color: #fa61ae;
+  color: white;
+}
+
+.custom-btn:hover {
+  background-color: #ff4d9e;
   color: white;
 }
