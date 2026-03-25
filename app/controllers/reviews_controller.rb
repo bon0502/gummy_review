@@ -1,6 +1,10 @@
 class ReviewsController < ApplicationController
+
+  skip_before_action :require_login, only: %i[index]
+
   def index
     @reviews = Review.all
+    @reviews = Review.order(created_at: :desc).page(params[:page]).per(9)
   end
 
   def new

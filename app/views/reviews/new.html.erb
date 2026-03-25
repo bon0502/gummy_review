@@ -1,4 +1,4 @@
-<h1 class="title">レビュー投稿</h1>
+<h1 class="title">🌟レビュー投稿🌟</h1>
 
 <%= form_with model: @review, class: "review-form", enctype: "multipart/form-data" do |f| %>
 
@@ -24,22 +24,22 @@
 
   <!-- 横並び -->
   <div class="row-group">
-    <div>
+    <div class="fw-bold">
       <%= f.label :flavor, "🩵フレーバー🩵" %>
       <%= f.text_field :flavor %>
     </div>
 
-    <div>
+    <div class="fw-bold">
       <%= f.label :hardness, "🩶硬さ🩶" %>
       <%= f.select :hardness, [["とてもソフト", 1], ["ソフト", 2], ["普通", 3], ["ハード", 4], ["とてもハード", 5]] %>
     </div>
 
-    <div>
+    <div class="fw-bold">
       <%= f.label :sweetness, "🩷甘さ🩷" %>
       <%= f.select :sweetness, [["甘くない", 1], ["甘さ控えめ", 2], ["甘い", 3], ["少し甘い", 4], ["とても甘い", 5]] %>
     </div>
 
-    <div>
+    <div class="fw-bold">
       <%= f.label :sourness, "💛酸味💛" %>
       <%= f.select :sourness, [["酸っぱくない", 1], ["酸っぱさ控えめ", 2], ["酸っぱい", 3], ["少し酸っぱい", 4], ["とても酸っぱい", 5]] %>
     </div>
