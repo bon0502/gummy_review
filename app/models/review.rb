@@ -1,7 +1,6 @@
 class Review < ApplicationRecord
   belongs_to :user
   # belongs_to :gummy
-
   mount_uploader :photo_url, PhotoUploader
   mount_uploaders :main_images, PhotoUploader
 

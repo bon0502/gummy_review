@@ -1,6 +1,6 @@
 <h1 class="title">レビュー投稿</h1>
 
-<%= form_with model: @review, class: "review-form" do |f| %>
+<%= form_with model: @review, class: "review-form", enctype: "multipart/form-data" do |f| %>
 
   <div class="form-group">
     <%= f.label :photo_url, "グミ画像（メイン１枚）" %>

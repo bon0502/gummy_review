@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_23_153721) do
+ActiveRecord::Schema[7.0].define(version: 2026_03_25_005746) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_23_153721) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "main_images"
+    t.json "main_images"
     t.string "gummy_name"
     t.string "flavor"
     t.string "manufacturer_name"
