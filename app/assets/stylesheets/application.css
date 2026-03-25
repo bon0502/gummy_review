@@ -172,3 +172,20 @@ textarea {
 .submit-area input:hover {
   background-color: #7fddff;
 }
+
+.card-link {
+  text-decoration: none; /* 下線を消す */
+}
+
+.card-link:hover {
+  text-decoration: none; /* ホバー時も下線を消す */
+}
+
+.custom-card {
+  background-color: #fcc2ff;
+}
+
+.custom-btn {
+  background-color: #fa61ae;
+  color: white;
+}

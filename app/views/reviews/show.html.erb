@@ -1,0 +1,39 @@
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <h1 class="mb-4"><%= @review.gummy_name %></h1>
+        <div class="card custom-card">
+          <div class="row justify-content-center">
+            <div class="col-md-4">
+              <%= image_tag @review.photo_url.url, class: "img-fluid", alt: @review.gummy_name %>
+            </div>
+            <% @review.main_images.each do |image| %>
+              <div class="col-md-4">
+                <%= image_tag image.url, class: "img-fluid", alt: @review.gummy_name %>
+              </div>
+            <% end %>
+          </div>
+          <!-- テキスト部分 -->
+          <div class="card-body">
+            <p class="text-center fw-bold">総合評価：<%= display_star_rating(@review.rating) %></p>
+            <p class="fw-bold">💚メーカー：<%= @review.manufacturer_name %></p>
+            <p class="fw-bold">🩵フレーバー：<%= @review.flavor %></p>
+            <p class="fw-bold">🩷甘さ：<%= @review.sweetness_label %></p>
+            <p class="fw-bold">💛酸味：<%= @review.sourness_label %></p>
+            <p class="fw-bold">🩶硬さ：<%= @review.hardness_label %></p>
+            <div class="card">
+              <p class="fw-bold">⭐グミの特徴⭐</p><%= @review.comment %>
+            </div>
+            <div class="card-footer text-muted">
+              <p>投稿者：<%= @review.user.nickname %></p>
+              <p>投稿日：<%= @review.created_at.strftime("%Y年%m月%d日") %></p>
+            </div>
+          </div>
+        </div>
+       <div class="text-center mt-3">
+        <%= link_to "グミ一覧に戻る", reviews_path, class: "btn custom-btn" %>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
