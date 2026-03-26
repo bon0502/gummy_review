@@ -2,7 +2,9 @@
   <div class="header-container">
     <!-- ロゴ -->
     <h1 class="header-logo">
-      <%= link_to "Gummy Review", root_path %>
+      <%= link_to root_path do %>
+        <%= image_tag '530F18F2-5BFD-4749-99FE-214D183EAD4B.png', class: 'header-logo-image'  %>
+      <% end %>
     </h1>
     <!-- ナビゲーション -->
     <nav class="header-nav">

@@ -74,6 +74,8 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: #e3baf8;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 500;
 }
 
 main {
@@ -200,4 +202,17 @@ textarea {
 .custom-btn:hover {
   background-color: #ff4d9e;
   color: white;
+}
+
+.header-logo-image {
+  width: 130px;  /* お好みの横幅に調整してください */
+  height: auto;  /* 縦横比を保つために auto を指定 */
+}
+
+.pagination a {
+  color: #a02cff;
+}
+
+.pagination a:hover {
+  color: #d900ff;
 }
