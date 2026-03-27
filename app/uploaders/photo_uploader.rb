@@ -3,7 +3,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
     storage :file
 
-    process resize_to_fit: [800, 800]
+    process resize_to_fit: [300, 300]
   def default_url
    "E51711FC-56D8-431F-B2C9-04124182C753.jpeg"
   end
