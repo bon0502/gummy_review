@@ -57,6 +57,7 @@ gem 'sorcery', '0.16.3'
 gem 'rails-i18n', '~> 7.0.0'
 
 gem 'carrierwave', '2.2.2'
+gem 'fog-aws', '~> 3.0'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -64,6 +65,8 @@ gem 'carrierwave', '2.2.2'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -81,5 +84,4 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-
 end
