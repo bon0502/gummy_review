@@ -1,15 +1,24 @@
 <h1 class="title">🌟レビュー投稿🌟</h1>
 
-<%= form_with model: @review, class: "review-form", enctype: "multipart/form-data" do |f| %>
+<%= form_with model: @review, class: "review-form", enctype: "multipart/form-data", data: { controller: "image-resize" } do |f| %>
 
   <div class="form-group">
     <%= f.label :photo_url, "グミ画像（メイン１枚）" %>
-    <%= f.file_field :photo_url %>
+    <%= f.file_field :photo_url,
+          data: {
+              image_resize_target: "main",
+              action: "change->image-resize#resizeMain"
+          }%>
   </div>
 
   <div class="form-group">
     <%= f.label :main_images, "他のグミたち（複数選択可）" %>
-    <%= f.file_field :main_images, multiple: true %>
+    <%= f.file_field :main_images,
+          multiple: true,
+          data: {
+              image_resize_target: "sub",
+              action: "change->image-resize#resizeSub"
+          }%>
   </div>
 
   <div class="form-group">
