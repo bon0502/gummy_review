@@ -205,7 +205,7 @@ textarea {
 }
 
 .header-logo-image {
-  width: 130px;  /* お好みの横幅に調整してください */
+  width: 130px;  /* ヘッダーのロゴ画像の横幅 */
   height: auto;  /* 縦横比を保つために auto を指定 */
 }
 
@@ -215,4 +215,9 @@ textarea {
 
 .pagination a:hover {
   color: #d900ff;
+}
+
+.navbar-brand img {
+  width: 130px; /* ログアウト状態のヘッダーのロゴ画像の横幅 */
+  height: auto; /* 縦横比を保つために auto を指定 */
 }
