@@ -27,6 +27,26 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+    @review = current_user.reviews.find(params[:id])
+  end
+
+  def update
+    @review = current_user.reviews.find(params[:id])
+    if @review.update(review_params)
+      redirect_to review_path(@review), success: "グミを更新しました！"
+    else
+      flash.now[:danger] = "グミの更新に失敗しました…"
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @review = current_user.reviews.find(params[:id])
+    @review.destroy
+    redirect_to reviews_path, success: "グミを削除しました！"
+  end
+
   private
 
   def review_params

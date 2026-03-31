@@ -39,3 +39,5 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "&hellip;"
+  defaults:
+    delete_confirm: "本当に削除しますか？"

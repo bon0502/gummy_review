@@ -28,6 +28,13 @@
               <p>投稿者：<%= @review.user.nickname %></p>
               <p>投稿日：<%= @review.created_at.strftime("%Y年%m月%d日") %></p>
             </div>
+              <% if current_user && current_user == @review.user %>
+                <div class="text-end mt-3">
+                  <%= link_to "編集", edit_review_path(@review), class: "btn btn-edit" %>
+                  <%= link_to "削除", review_path(@review), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } , class: "btn btn-delete" %>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
        <div class="text-center mt-3">

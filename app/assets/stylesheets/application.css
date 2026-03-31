@@ -221,3 +221,27 @@ textarea {
   width: 130px; /* ログアウト状態のヘッダーのロゴ画像の横幅 */
   height: auto; /* 縦横比を保つために auto を指定 */
 }
+
+.text-end {
+  text-align: right;
+}
+
+.btn-edit {
+  background-color: #91dcf7;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #69d2f8;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #ff4d4d;
+  color: white;
+}
