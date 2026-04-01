@@ -2,7 +2,10 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      comment: コメント
     attributes:
+      comment:
+        body: コメントを書く
       user:
         email: メールアドレス
         nickname: ニックネーム

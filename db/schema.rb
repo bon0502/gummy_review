@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_25_005746) do
+ActiveRecord::Schema[7.0].define(version: 2026_03_31_023123) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "review_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_comments_on_review_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "flavor_gummies", force: :cascade do |t|
     t.bigint "flavor_id", null: false
@@ -79,6 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_25_005746) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "comments", "reviews"
+  add_foreign_key "comments", "users"
   add_foreign_key "flavor_gummies", "flavors"
   add_foreign_key "flavor_gummies", "gummies"
   add_foreign_key "gummies", "makers"
