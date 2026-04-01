@@ -41,3 +41,4 @@ ja:
       truncate: "&hellip;"
   defaults:
     delete_confirm: "本当に削除しますか？"
+    post: "コメント投稿！"

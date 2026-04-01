@@ -1,0 +1,11 @@
+<div class="row mb-3" id="comment-form">
+  <div class="col-lg-8 offset-lg-2">
+    <%= form_with model: comment, url: review_comments_path(@review) do |f| %>
+      <%= f.label :body, "コメント" %>
+      <%= f.text_area :body, class: "form-control mb-3", row: "4", placeholder: Comment.human_attribute_name(:body) %>
+      <div class="text-end">
+        <%= f.submit t('defaults.post'), class: "btn custom-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
