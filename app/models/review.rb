@@ -2,6 +2,7 @@ class Review < ApplicationRecord
   belongs_to :user
   # belongs_to :gummy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   mount_uploader :photo_url, PhotoUploader
   mount_uploaders :main_images, PhotoUploader
 
