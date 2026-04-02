@@ -34,6 +34,11 @@
                   <%= link_to "削除", review_path(@review), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } , class: "btn btn-delete" %>
                 </div>
               <% end %>
+              <% if current_user.likes.exists?(review: @review) %>
+                <%= button_to "❤️ #{@review.likes.count} いいね解除", review_like_path(@review), method: :delete, class: "btn btn-outline-danger" %>
+              <% else %>
+                <%= button_to "🤍 #{@review.likes.count} いいね", review_like_path(@review), method: :post, class: "btn btn-danger" %>
+              <% end %>
               <%= render 'comments/form', comment: @comment, review: @review %>
               <div class="row">
                 <div class="col-lg-8 offset-lg-2">
