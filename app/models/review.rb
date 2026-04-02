@@ -7,6 +7,14 @@ class Review < ApplicationRecord
 
   validates :gummy_name, :flavor, :rating, :sweetness, :sourness, :hardness, presence: true
 
+  def self.ransackable_attributes(auth_object = nil)
+    ["comment", "flavor", "gummy_name", "hardness", "id", "purchase_location", "rating", "sourness", "sweetness", "updated_at", "user_id"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["comments", "user"]
+  end
+
   def sweetness_label
     case sweetness
     when 1

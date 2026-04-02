@@ -3,8 +3,24 @@ class ReviewsController < ApplicationController
   skip_before_action :require_login, only: %i[index]
 
   def index
-    @reviews = Review.all
-    @reviews = Review.order(created_at: :desc).page(params[:page]).per(9)
+    flavor_keyword = nil
+
+    if params[:q] && params[:q][:flavor_cont].present?
+      flavor_keyword = params[:q].delete(:flavor_cont)
+    end
+
+    @q = Review.ransack(params[:q])
+
+    if flavor_keyword.present?
+      katakana_keyword = flavor_keyword.hiragana_to_katakana
+      hiragana_keyword = flavor_keyword.katakana_to_hiragana
+
+      @reviews = @q.result.includes(:user)
+                   .where("flavor LIKE ? OR flavor LIKE ?", "%#{katakana_keyword}%", "%#{hiragana_keyword}%")
+                   .order(created_at: :desc).page(params[:page]).per(9)
+    else
+      @reviews = @q.result.includes(:user).order(created_at: :desc).page(params[:page]).per(9)
+    end
   end
 
   def new

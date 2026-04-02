@@ -1,0 +1,4 @@
+<%= search_form_for @q, url: reviews_path do |f| %>
+   <%= f.search_field :gummy_name_or_flavor_cont, class: 'form-control', placeholder: '検索ワード' %>
+   <%= f.submit '検索', class: 'btn btn-primary' %>
+<% end %>
