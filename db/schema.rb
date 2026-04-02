@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_03_31_023123) do
+ActiveRecord::Schema[7.0].define(version: 2026_04_01_084709) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2026_03_31_023123) do
     t.string "gummy_name"
     t.string "flavor"
     t.string "manufacturer_name"
+    t.string "gummy_name_kana"
+    t.string "flavor_kana"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
