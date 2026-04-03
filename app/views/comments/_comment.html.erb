@@ -1,7 +1,7 @@
 <tr id="comment-<%= comment.id %>">
   <td style="width: 60px">
-    <% if comment.user.profile_image? %>
-      <%=image_tag comment.user.profile_image.url, width: "50", height: "50", class: "rounded-circle" %>
+    <% if comment.user.avatar? %>
+      <%=image_tag comment.user.avatar.url, width: "50", height: "50", class: "rounded-circle" %>
     <% else %>
       <%= image_tag "3D907821-682B-4811-A279-7ADECE821E4B.png", width: "50", height: "50", class: "rounded-circle" %>
     <% end %>
