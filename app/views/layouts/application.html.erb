@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <% if @review.present? %>
+      <meta property="og:title" content="<%= @review.gummy_name %>のレビュー">
+      <meta property="og:description" content="<%= @review.comment %>">
+      <meta property="og:image" content="<%= @review.photo_url.url if @review.photo_url.present? %>">
+      <meta property="og:url" content="<%= request.original_url %>">
+    <% end %>
+
     <%= javascript_importmap_tags %>
 
     <!-- Bootstrap Icons を追加 -->

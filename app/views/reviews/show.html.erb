@@ -39,6 +39,16 @@
               <% else %>
                 <%= button_to "🤍 #{@review.likes.count} いいね", review_like_path(@review), method: :post, class: "btn btn-danger" %>
               <% end %>
+                <div class="d-flex justify-content-center mt-3 gap-5">
+                  <%= link_to "https://x.com/intent/tweet?url=#{review_url(@review)}&text=#{@review.gummy_name}のレビュー！", class: "fs-2", target: "_blank" do %>
+                    <i class="bi bi-twitter" style="color: #1DA1F2;"></i>
+                  <% end %>
+
+                  <%= link_to "https://social-plugins.line.me/lineit/share?url=#{review_url(@review)}", class: "fs-2
+                  ", target: "_blank" do %>
+                    <i class="bi bi-line" style="color: #06C755;"></i>
+                  <% end %>
+                </div>
               <%= render 'comments/form', comment: @comment, review: @review %>
               <div class="row">
                 <div class="col-lg-8 offset-lg-2">
