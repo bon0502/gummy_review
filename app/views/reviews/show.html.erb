@@ -34,10 +34,12 @@
                   <%= link_to "削除", review_path(@review), data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } , class: "btn btn-delete" %>
                 </div>
               <% end %>
-              <% if current_user.likes.exists?(review: @review) %>
-                <%= button_to "❤️ #{@review.likes.count} いいね解除", review_like_path(@review), method: :delete, class: "btn btn-outline-danger" %>
-              <% else %>
-                <%= button_to "🤍 #{@review.likes.count} いいね", review_like_path(@review), method: :post, class: "btn btn-danger" %>
+              <% if logged_in? %>
+                <% if current_user.likes.exists?(review: @review) %>
+                  <%= button_to "❤️ #{@review.likes.count} いいね解除", review_like_path(@review), method: :delete, class: "btn btn-outline-danger" %>
+                <% else %>
+                  <%= button_to "🤍 #{@review.likes.count} いいね", review_like_path(@review), method: :post, class: "btn btn-danger" %>
+                <% end %>
               <% end %>
                 <div class="d-flex justify-content-center mt-3 gap-5">
                   <%= link_to "https://x.com/intent/tweet?url=#{review_url(@review)}&text=#{@review.gummy_name}のレビュー！", class: "fs-2", target: "_blank" do %>
@@ -49,16 +51,18 @@
                     <i class="bi bi-line" style="color: #06C755;"></i>
                   <% end %>
                 </div>
-              <%= render 'comments/form', comment: @comment, review: @review %>
-              <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                  <table class="table">
-                    <tbody id="table-comment">
-                      <%= render partial: 'comments/comment', collection: @comments, locals: { review: @review } %>
-                    </tbody>
-                  </table>
-                </div>
-               </div>
+              <% if logged_in? %>
+                <%= render 'comments/form', comment: @comment, review: @review %>
+                  <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                      <table class="table">
+                        <tbody id="table-comment">
+                          <%= render partial: 'comments/comment', collection: @comments, locals: { review: @review } %>
+                        </tbody>
+                      </table>
+                    </div>
+                 </div>
+              <% end %>
             </div>
           </div>
         </div>
