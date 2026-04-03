@@ -17,3 +17,4 @@ class PhotoUploader < CarrierWave::Uploader::Base
   def fog_authenticated_url_expiration
     5.weeks.to_i # URLの有効期限を5週間に設定
   end
+end
