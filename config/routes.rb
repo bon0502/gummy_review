@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   root 'static_pages#top'
   resources :users, only: %i[new create]
+  resource :profile, only: %i[show edit update]
   resources :reviews, only: %i[index new create show edit update destroy] do
     resource :like, only: [:create, :destroy]
     resources :comments, only: %i[create destroy]

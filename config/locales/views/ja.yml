@@ -42,3 +42,13 @@ ja:
   defaults:
     delete_confirm: "本当に削除しますか？"
     post: "コメント投稿！"
+    edit: "編集"
+  profiles:
+    show:
+      title: ⭐️プロフィール⭐️
+    edit:
+      title: ⭐️プロフィール編集⭐️
+    update:
+      success: プロフィールを更新しました
+      failure: プロフィールの更新に失敗しました
+

@@ -1,0 +1,10 @@
+<% if object.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= t('errors.messages.not_saved', count: object.errors.count) %></h4>
+    <ul>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
