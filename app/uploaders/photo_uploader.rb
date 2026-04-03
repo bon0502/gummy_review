@@ -13,4 +13,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   def default_url
    "E51711FC-56D8-431F-B2C9-04124182C753.jpeg"
   end
-end
+
+  def fog_authenticated_url_expiration
+    5.weeks.to_i # URLの有効期限を5週間に設定
+  end
