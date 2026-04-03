@@ -8,7 +8,7 @@
     <% if @review.present? %>
       <meta property="og:title" content="<%= @review.gummy_name %>のレビュー">
       <meta property="og:description" content="<%= @review.comment %>">
-      <meta property="og:image" content="<%= @review.photo_url.url if @review.photo_url.present? %>">
+      <meta property="og:image" content="<%= @review.photo_url.url(expires_in: 5.weeks) if @review.photo_url.present? %>">
       <meta property="og:url" content="<%= request.original_url %>">
     <% end %>
 
