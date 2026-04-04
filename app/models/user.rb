@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   authenticates_with_sorcery!
   mount_uploader :avatar, AvatarUploader

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProfilesController < ApplicationController
   def show; end
 
@@ -8,9 +10,9 @@ class ProfilesController < ApplicationController
   def update
     @user = current_user
     if current_user.update(profile_params)
-      redirect_to profile_path, success: t('profiles.update.success')
+      redirect_to profile_path, success: t('.success')
     else
-      flash.now[:danger] = t('profiles.update.failure')
+      flash.now[:danger] = t('.failure')
       render :edit, status: :unprocessable_entity
     end
   end

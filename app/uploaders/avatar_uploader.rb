@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvatarUploader < CarrierWave::Uploader::Base
   # 環境に応じて storage を切り替える
   if Rails.env.production?
@@ -22,7 +24,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "3D907821-682B-4811-A279-7ADECE821E4B.png"
+    '3D907821-682B-4811-A279-7ADECE821E4B.png'
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -48,7 +50,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # Override the filename of the uploaded files:

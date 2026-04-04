@@ -1,69 +1,73 @@
+# frozen_string_literal: true
+
 class Review < ApplicationRecord
   belongs_to :user
   # belongs_to :gummy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+
   mount_uploader :photo_url, PhotoUploader
   mount_uploaders :main_images, PhotoUploader
 
   validates :gummy_name, :flavor, :rating, :sweetness, :sourness, :hardness, presence: true
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["comment", "flavor", "gummy_name", "hardness", "id", "purchase_location", "rating", "sourness", "sweetness", "updated_at", "user_id"]
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[comment flavor gummy_name hardness id purchase_location rating sourness sweetness
+       updated_at user_id]
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["comments", "user"]
+  def self.ransackable_associations(_auth_object = nil)
+    %w[comments user]
   end
 
   def sweetness_label
     case sweetness
     when 1
-      "とても甘い"
+      'とても甘い'
     when 2
-      "少し甘い"
+      '少し甘い'
     when 3
-      "甘い"
+      '甘い'
     when 4
-      "甘さ控えめ"
+      '甘さ控えめ'
     when 5
-      "甘くない"
+      '甘くない'
     else
-      "不明"
+      '不明'
     end
   end
 
   def sourness_label
     case sourness
     when 1
-      "酸っぱくない"
+      '酸っぱくない'
     when 2
-      "酸っぱさ控えめ"
+      '酸っぱさ控えめ'
     when 3
-      "酸っぱい"
+      '酸っぱい'
     when 4
-      "少し酸っぱい"
+      '少し酸っぱい'
     when 5
-      "とても酸っぱい"
+      'とても酸っぱい'
     else
-      "不明"
+      '不明'
     end
   end
 
   def hardness_label
     case hardness
     when 1
-      "とてもソフト"
+      'とてもソフト'
     when 2
-      "ソフト"
+      'ソフト'
     when 3
-      "普通"
+      '普通'
     when 4
-      "ハード"
+      'ハード'
     when 5
-      "とてもハード"
+      'とてもハード'
     else
-      "不明"
+      '不明'
     end
   end
 end

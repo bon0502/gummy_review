@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :require_login
 
@@ -7,9 +9,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-      redirect_to @review, success: "コメントを投稿しました"
+      redirect_to @review, success: 'コメントを投稿しました'
     else
-      redirect_to @review, danger: "コメント投稿に失敗しました"
+      redirect_to @review, danger: 'コメント投稿に失敗しました'
     end
   end
 
@@ -17,7 +19,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.find(params[:id])
     @review = @comment.review
     @comment.destroy
-    redirect_to @review, success: "コメントを削除しました"
+    redirect_to @review, success: 'コメントを削除しました'
   end
 
   private
