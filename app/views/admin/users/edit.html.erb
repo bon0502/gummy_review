@@ -1,0 +1,36 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-danger">
+    <h4><%= @user.errors.count %>件のエラーがあります</h4>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <h1>ユーザー編集</h1>
+
+  <%= form_with model: [:admin, @user], local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :nickname, "ニックネーム" %>
+      <%= f.text_field :nickname, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :role, "権限" %>
+      <%= f.select :role, User.roles.keys.map { |k| [k, k] }, {}, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.submit "更新", class: "btn btn-primary" %>
+      <%= link_to "キャンセル", admin_users_path, class: "btn btn-secondary" %>
+    </div>
+  <% end %>
+</div>

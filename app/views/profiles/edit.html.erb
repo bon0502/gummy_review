@@ -3,6 +3,8 @@
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-auto">
       <h1><%= t('.title') %></h1>
+      
+      <!-- プロフィール情報の更新フォーム -->
       <%= form_with model: @user, url: profile_path, method: :put do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <div class="mb-3">
@@ -25,6 +27,31 @@
           </div>
         </div>
         <%= f.submit class: "btn custom-btn" %>
+      <% end %>
+
+      <hr class="my-5">
+
+      <!-- パスワード変更フォーム -->
+      <h2>パスワード変更</h2>
+      <%= form_with model: @user, url: update_password_profile_path, method: :patch do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        
+        <div class="mb-3">
+          <%= f.label :current_password, '現在のパスワード', class: "form-label" %>
+          <%= f.password_field :current_password, class: "form-control", placeholder: "変更する場合のみ入力" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :password, '新しいパスワード', class: "form-label" %>
+          <%= f.password_field :password, class: "form-control", placeholder: "変更する場合のみ入力" %>
+        </div>
+        
+        <div class="mb-3">
+          <%= f.label :password_confirmation, '新しいパスワード（確認）', class: "form-label" %>
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: "変更する場合のみ入力" %>
+        </div>
+        
+        <%= f.submit 'パスワードを変更', class: "btn btn-warning" %>
       <% end %>
     </div>
   </div>
