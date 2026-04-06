@@ -1,7 +1,21 @@
 <div class="container pt-3">
   <div class="row">
     <div class="col-lg-10 offset-lg-1">
-      <h1 class="mb-4">⭐️グミ一覧⭐️</h1>
+          <!-- ここに検索フォームを追加 -->
+      <%= search_form_for @q, url: reviews_path do |f| %>
+        <div style="display: flex; gap: 10px;">
+          <!-- テキスト入力 -->
+          <%= f.search_field :gummy_name_cont, placeholder: "グミの名前" %>
+          <%= f.search_field :flavor_cont, placeholder: "フレーバー" %>
+
+          <!-- プルダウン -->
+          <%= f.select :sweetness_eq, [["甘くない", 1], ["甘さ控えめ", 2], ["甘い", 3], ["少し甘い", 4], ["とても甘い", 5]], include_blank: "甘さは？" %>
+          <%= f.select :sourness_eq, [["酸っぱくない", 1], ["酸っぱさ控えめ", 2], ["酸っぱい", 3], ["少し酸っぱい", 4], ["とても酸っぱい", 5]], include_blank: "酸っぱさは？" %>
+          <%= f.select :hardness_eq, [["とてもソフト", 1], ["ソフト", 2], ["普通", 3], ["ハード", 4], ["とてもハード", 5]], include_blank: "硬さは？" %>
+          <%= f.submit "検索", class: "btn custom-btn" %>
+        </div>
+      <% end %>
+      <h1 class="top-container mb-5 mt-5">⭐️グミ一覧⭐️</h1>
     </div>
   </div>
   <div class="row">

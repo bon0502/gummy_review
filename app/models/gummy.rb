@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Gummy < ApplicationRecord
-  mount_uploader :photo, PhotoUploader
-  belongs_to :maker
+  mount_uploader :photo_url, PhotoUploader
+  belongs_to :maker, optional: true
   has_many :flavor_gummies, dependent: :destroy
   has_many :flavors, through: :flavor_gummies
 
