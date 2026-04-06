@@ -41,6 +41,10 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
 
     if @review.save
+
+      # 複数画像の処理を追加
+      save_main_images(@review)
+
       redirect_to review_path(@review), success: 'グミを投稿しました！'
     else
       flash.now[:danger] = 'グミの投稿に失敗しました…'
@@ -51,6 +55,10 @@ class ReviewsController < ApplicationController
   def update
     @review = current_user.reviews.find(params[:id])
     if @review.update(review_params)
+
+      # 複数画像の処理を追加
+      save_main_images(@review)
+
       redirect_to review_path(@review), success: 'グミを更新しました！'
     else
       flash.now[:danger] = 'グミの更新に失敗しました…'
@@ -67,7 +75,33 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:photo_url, :gummy_name, :rating, :flavor, :hardness, :sweetness, :sourness,
-                                   :manufacturer_name, :comment, main_images: [])
+    params.require(:review).permit(
+      :gummy_name,
+      :flavor,
+      :rating,
+      :sweetness,
+      :sourness,
+      :hardness,
+      :comment,
+      :photo_url,
+      :purchase_location,
+      :manufacturer_name,
+      :gummy_name_kana,
+      :flavor_kana,
+      main_images_attributes: [:id, :image, :_destroy]
+    )
+  end
+
+  # 複数画像を保存するメソッドを追加
+  def save_main_images(review)
+    # フォームから送られてきた複数画像を処理
+    return unless params[:review][:main_images_images].present?
+
+    params[:review][:main_images_images].each do |image|
+      # 空のファイルは無視
+      next if image.blank?
+
+      review.main_images.create(image: image)
+    end
   end
 end

@@ -4,9 +4,12 @@ class Review < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :main_images, dependent: :destroy
 
   mount_uploader :photo_url, PhotoUploader
-  mount_uploaders :main_images, PhotoUploader
+  # mount_uploaders :main_images, PhotoUploader
+
+  accepts_nested_attributes_for :main_images, allow_destroy: true
 
   validates :gummy_name, :flavor, :rating, :sweetness, :sourness, :hardness, presence: true
 
