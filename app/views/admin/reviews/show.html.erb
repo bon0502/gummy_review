@@ -1,0 +1,99 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-10 offset-md-1">
+      <div class="card">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+          <h2 class="mb-0">投稿詳細</h2>
+          <%= link_to '一覧に戻る', admin_reviews_path, class: 'btn btn-sm btn-light' %>
+        </div>
+        <div class="card-body">
+          <!-- 投稿者情報 -->
+          <div class="mb-4 p-3 bg-light rounded">
+            <h5>投稿者情報</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1">
+                  <strong>ニックネーム:</strong>
+                  <%= link_to @review.user.nickname, admin_user_path(@review.user), 
+                      class: 'text-decoration-none' %>
+                </p>
+                <p class="mb-1">
+                  <strong>メール:</strong> <%= @review.user.email %>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1">
+                  <strong>ロール:</strong>
+                  <span class="badge <%= @review.user.admin? ? 'bg-danger' : 'bg-secondary' %>">
+                    <%= @review.user.role %>
+                  </span>
+                </p>
+                <p class="mb-1">
+                  <strong>投稿日時:</strong> <%= l(@review.created_at, format: :long) %>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 投稿内容 -->
+          <div class="mb-4">
+            <h5>レビュー内容</h5>
+            <div class="p-3 border rounded">
+              <%= simple_format(@review.comment) %>
+            </div>
+          </div>
+
+          <!-- 画像 -->
+        <div class="mb-4">
+          <h5>画像</h5>
+
+          <% if @review.photo_url.present? %>
+            <%= image_tag @review.photo_url.url, class: 'img-thumbnail', style: 'max-width: 300px;' %>
+          <% end %>
+
+          <% if @review.main_images.any? %>
+            <div class="row">
+              <% @review.main_images.each do |main_image| %>
+                <div class="col-md-4 mb-3">
+                  <%= image_tag main_image.image.url, class: 'img-thumbnail' %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% if @review.photo_url.blank? && @review.main_images.empty? %>
+            <span class="text-muted">画像がアップロードされていません</span>
+          <% end %>
+        </div>
+          <!-- コメント情報 -->
+          <div class="mb-4">
+            <h5>コメント数</h5>
+            <p class="mb-0">
+              <span class="badge bg-info"><%= @review.comments.count %> 件</span>
+            </p>
+          </div>
+
+          <!-- いいね情報 -->
+          <div class="mb-4">
+            <h5>いいね数</h5>
+            <p class="mb-0">
+              <span class="badge bg-danger"><%= @review.likes.count %> 件</span>
+            </p>
+          </div>
+
+          <!-- 削除ボタン -->
+          <div class="d-flex justify-content-end">
+            <%= button_to '投稿を削除', admin_review_path(@review),
+                method: :delete,
+                class: 'btn btn-danger',
+                form: {
+                  data: {
+                    turbo_confirm: '本当に削除しますか？この操作は取り消せません。コメントやいいねも削除されます。' 
+                  }
+                } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

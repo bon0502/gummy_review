@@ -13,21 +13,9 @@ class UserSessionsController < ApplicationController
 
       # 「ログイン状態を保持する」にチェックが入っている場合
       if params[:remember_me] == '1'
-        # ランダムなトークンを生成してDBに保存
-        remember_token = SecureRandom.urlsafe_base64
-        @user.update(remember_token: remember_token)
-
-        # 有効期限を2週間に設定した永続的なCookieを作成
-        cookies.signed[:user_id] = {
-          value: @user.id,
-          expires: 2.weeks.from_now,
-          httponly: true
-        }
-        cookies[:remember_token] = {
-          value: remember_token,
-          expires: 2.weeks.from_now,
-          httponly: true
-        }
+        remember_me!  # ← Sorcery のメソッドを使用
+      else
+        forget_me!    # ← チェックが入っていない場合は削除
       end
 
       redirect_to root_path, success: t('.success')
@@ -39,7 +27,17 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+    # 永続的なセッション（remember token）を削除
+    # ※ logout より前に実行する必要がある
+    forget_me! if logged_in?
+
+    # 通常のセッションをログアウト
     logout
-    redirect_to root_path, status: :see_other, success: t('.success')
+
+    # セッション全体をリセット
+    reset_session
+
+    flash[:success] = t('user_sessions.destroy.success')
+    redirect_to root_path, status: :see_other
   end
 end

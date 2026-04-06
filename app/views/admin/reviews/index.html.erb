@@ -1,0 +1,83 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>グミ投稿管理</h1>
+        <div>
+          <span class="badge bg-info">全 <%= @reviews.total_count %> 件</span>
+        </div>
+      </div>
+
+      <% if @reviews.present? %>
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th style="width: 5%">ID</th>
+                <th style="width: 15%">投稿者</th>
+                <th style="width: 35%">内容</th>
+                <th style="width: 10%">画像</th>
+                <th style="width: 15%">投稿日時</th>
+                <th style="width: 20%">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @reviews.each do |review| %>
+                <tr>
+                  <td><%= review.id %></td>
+                  <td>
+                    <%= link_to review.user.nickname, admin_user_path(review.user),
+                        class: 'text-decoration-none' %>
+                    <br>
+                    <small class="text-muted"><%= review.user.email %></small>
+                  </td>
+                  <td>
+                    <div class="review-content">
+                      <%= truncate(review.comment, length: 100) %>
+                    </div>
+                  </td>
+                  <td>
+                    <% if review.photo_url.present? %>
+                      <%= image_tag review.photo_url.url, class: 'img-thumbnail', size: '50x50' %>
+                    <% elsif review.main_images.any? %>
+                      <%= image_tag review.main_images.first.image.url, class: 'img-thumbnail', size: '50x50' %>
+                      <% if review.main_images.count > 1 %>
+                        <span class="badge bg-secondary">+<%= review.main_images.count - 1 %></span>
+                      <% end %>
+                    <% else %>
+                      <span class="text-muted">なし</span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= l(review.created_at, format: :short) %>
+                  </td>
+                  <td>
+                    <%= link_to '詳細', admin_review_path(review),
+                        class: 'btn btn-sm btn-info text-white me-1' %>
+                    <%= button_to '削除', admin_review_path(review),
+                        method: :delete,
+                        class: 'btn btn-sm btn-danger',
+                        form: {
+                          data: {
+                            turbo_confirm: '本当に削除しますか？この操作は取り消せません。'
+                          }
+                        } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ページネーション -->
+        <div class="d-flex justify-content-center mt-4">
+          <%= paginate @reviews %>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          投稿がまだありません。
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

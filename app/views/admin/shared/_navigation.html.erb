@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <%= link_to '管理者ページ', admin_root_path, class: 'navbar-brand' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <%= link_to 'ユーザー管理', admin_users_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to '投稿管理', admin_reviews_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <%= button_to 'ログアウト', logout_path, method: :delete, class: 'btn btn-outline-light btn-sm' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

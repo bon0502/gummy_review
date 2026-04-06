@@ -63,6 +63,7 @@ gem 'rails-i18n', '~> 7.0.0'
 gem 'carrierwave', '2.2.2'
 gem 'fog-aws', '~> 3.0'
 gem 'mini_magick'
+gem 'enum_help'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

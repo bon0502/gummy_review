@@ -8,6 +8,25 @@ Rails.application.config.sorcery.submodules = [:remember_me]
 
 # Here you can configure each submodule's features.
 Rails.application.config.sorcery.configure do |config|
+    config.user_config do |user|
+    # 認証に使用するメールアドレスのカラム名
+    user.username_attribute_names = [:email]
+
+    # remember me 機能の有効期限（秒単位）
+    # 604800秒 = 7日間
+    user.remember_me_for = 604800
+
+    # remember me のトークンを保存するカラム名
+    user.remember_me_token_attribute_name = :remember_me_token
+
+    # remember me のトークンの有効期限を保存するカラム名
+    user.remember_me_token_expires_at_attribute_name = :remember_me_token_expires_at
+  end
+
+  # セッションの有効期限（秒単位）
+  config.user_config do |user|
+    user.stretches = 1 if Rails.env.test?
+  end
   # -- core --
   # What controller action to call for non-authenticated users. You can also
   # override the 'not_authenticated' method of course.
