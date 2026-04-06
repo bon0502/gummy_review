@@ -1,0 +1,38 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/migrate/*'
+    - 'config/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+  SuggestExtensions: false
+
+# 日本語のコメントを許可
+Style/AsciiComments:
+  Enabled: false
+
+# メソッドの行数制限を緩和
+Metrics/MethodLength:
+  Max: 30
+
+# ブロックの行数制限を緩和
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+# クラスやモジュールのドキュメントコメントを必須としない
+Style/Documentation:
+  Enabled: false
+
+# 日本語のフラッシュメッセージを許可
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+# メソッドの複雑度の閾値を緩和
+Metrics/AbcSize:
+  Max: 40

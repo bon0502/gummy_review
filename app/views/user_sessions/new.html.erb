@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class=" col-md-10 col-lg-8 mx-auto">
-      <h1>ログイン</h1>
+    <div class=" col-md-5 col-lg-5 mx-auto">
+      <h1 class="text-center">⭐️ログイン⭐️</h1>
       <%= form_with url: login_path do |f| %>
         <div class="mb-3">
           <%= f.label :email %>
@@ -11,6 +11,13 @@
           <%= f.label :password %>
           <%= f.password_field :password, class: "form-control" %>
         </div>
+        <div class="form-group">
+          <%= f.label :remember_me do %>
+            <%= f.check_box :remember_me %>
+            ログイン状態を保持する
+          <% end %>
+        </div>
+
         <%= f.submit "ログイン", class: "btn btn-pink" %>
       <% end %>
       <div class='text-center'>
