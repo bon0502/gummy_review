@@ -7,9 +7,9 @@
             <div class="col-md-4">
               <%= image_tag @review.photo_url.url, class: "img-fluid", alt: @review.gummy_name %>
             </div>
-            <% @review.main_images.each do |image| %>
+            <% @review.main_images.each do |main_image| %>
               <div class="col-md-4">
-                <%= image_tag image.url, class: "img-fluid", alt: @review.gummy_name %>
+                <%= image_tag main_image.image.url, class: "img-fluid", alt: @review.gummy_name %>
               </div>
             <% end %>
           </div>

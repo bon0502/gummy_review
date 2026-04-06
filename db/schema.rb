@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_04_04_060951) do
+ActiveRecord::Schema[7.0].define(version: 2026_04_06_030919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,6 +64,14 @@ ActiveRecord::Schema[7.0].define(version: 2026_04_04_060951) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "main_images", force: :cascade do |t|
+    t.bigint "review_id", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_main_images_on_review_id"
+  end
+
   create_table "makers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -114,5 +122,6 @@ ActiveRecord::Schema[7.0].define(version: 2026_04_04_060951) do
   add_foreign_key "gummies", "makers"
   add_foreign_key "likes", "reviews"
   add_foreign_key "likes", "users"
+  add_foreign_key "main_images", "reviews"
   add_foreign_key "reviews", "users"
 end
