@@ -39,3 +39,32 @@ if AdminUser.count.zero?
 else
   puts "ℹ️  管理者ユーザーは既に存在します（#{AdminUser.count}人）"
 end
+
+# 現在の管理者ユーザーを確認（本番環境のみ）
+if Rails.env.production?
+  puts "=" * 50
+  puts "📋 現在登録されている管理者ユーザー一覧"
+  puts "=" * 50
+
+  # AdminUser モデルを使っている場合
+  if defined?(AdminUser)
+    AdminUser.all.each do |admin|
+      puts "Email: #{admin.email}"
+      puts "Name: #{admin.name}" if admin.respond_to?(:name)
+      puts "-" * 50
+    end
+    puts "合計: #{AdminUser.count}人"
+  end
+
+  # User モデルで role を使っている場合
+  if defined?(User) && User.column_names.include?('role')
+    User.where(role: 1).each do |admin|
+      puts "Email: #{admin.email}"
+      puts "Role: admin"
+      puts "-" * 50
+    end
+    puts "合計: #{User.where(role: 1).count}人"
+  end
+
+  puts "=" * 50
+end
