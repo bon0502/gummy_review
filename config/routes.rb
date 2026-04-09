@@ -16,6 +16,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'dashboards#index'  # ← ダッシュボードを管理画面のトップページに設定
+
+    # 管理者のログイン機能を追加
+    get 'login', to: 'sessions#new', as: :login
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy', as: :logout
+
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       member do
         patch :reset_password
