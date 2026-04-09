@@ -1,0 +1,28 @@
+<% content_for(:title, '管理者ログイン') %>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <h2>管理者ログイン</h2>
+        </div>
+        <div class="card-body">
+          <%= form_with url: admin_login_path, local: true do |f| %>
+            <div class="mb-3">
+              <%= f.label :email, 'メールアドレス', class: 'form-label' %>
+              <%= f.email_field :email, class: 'form-control', required: true, autofocus: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password, 'パスワード', class: 'form-label' %>
+              <%= f.password_field :password, class: 'form-control', required: true %>
+            </div>
+
+            <%= f.submit 'ログイン', class: 'btn btn-primary w-100' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
