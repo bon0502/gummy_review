@@ -1,5 +1,7 @@
 class Admin::SessionsController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
+  skip_before_action :check_admin, only: %i[new create]
+  layout 'admin_login'
 
   def new; end
 
@@ -9,6 +11,7 @@ class Admin::SessionsController < ApplicationController
     if @admin_user
       redirect_to admin_root_path, success: t('.success')
     else
+      logout
       flash.now[:danger] = t('.failure')
       render :new, status: :unprocessable_entity
     end

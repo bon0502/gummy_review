@@ -20,51 +20,38 @@ if Rails.env.production?
   end
 end
 
-if AdminUser.count.zero?
-  admin = AdminUser.new(
-    name: 'Admin',
-    email: ENV['ADMIN_EMAIL'] || 'admin@example.com',
+admin_email = ENV['ADMIN_EMAIL'] || 'admin@example.com'
+
+# User テーブルに管理者を作成
+unless User.exists?(email: admin_email, role: :admin)
+  admin = User.new(
+    email: admin_email,
     password: ENV['ADMIN_PASSWORD'] || 'SecurePassword123!',
-    password_confirmation: ENV['ADMIN_PASSWORD'] || 'SecurePassword123!'
+    password_confirmation: ENV['ADMIN_PASSWORD'] || 'SecurePassword123!',
+    role: :admin
   )
 
   if admin.save
     puts "✅ 管理者ユーザーを作成しました"
     puts "   Email: #{admin.email}"
+    puts "   Role: #{admin.role}"
   else
     puts "❌ 管理者ユーザーの作成に失敗しました"
     puts admin.errors.full_messages.join("\n")
     exit 1
   end
 else
-  puts "ℹ️  管理者ユーザーは既に存在します（#{AdminUser.count}人）"
+  puts "ℹ️  管理者ユーザーは既に存在します"
 end
 
-# 現在の管理者ユーザーを確認（本番環境のみ）
-if Rails.env.production?
-  puts "=" * 50
-  puts "📋 現在登録されている管理者ユーザー一覧"
-  puts "=" * 50
-
-  # AdminUser モデルを使っている場合
-  if defined?(AdminUser)
-    AdminUser.all.each do |admin|
-      puts "Email: #{admin.email}"
-      puts "Name: #{admin.name}" if admin.respond_to?(:name)
-      puts "-" * 50
-    end
-    puts "合計: #{AdminUser.count}人"
-  end
-
-  # User モデルで role を使っている場合
-  if defined?(User) && User.column_names.include?('role')
-    User.where(role: 1).each do |admin|
-      puts "Email: #{admin.email}"
-      puts "Role: admin"
-      puts "-" * 50
-    end
-    puts "合計: #{User.where(role: 1).count}人"
-  end
-
-  puts "=" * 50
+# 確認用の出力
+puts "=" * 50
+puts "📋 現在の管理者ユーザー"
+puts "=" * 50
+User.where(role: :admin).each do |admin|
+  puts "Email: #{admin.email}"
+  puts "Role: #{admin.role}"
+  puts "-" * 50
 end
+puts "合計: #{User.where(role: :admin).count}人"
+puts "=" * 50

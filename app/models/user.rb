@@ -3,6 +3,9 @@
 class User < ApplicationRecord
   enum role: { general: 0, admin: 20 }
   authenticates_with_sorcery!
+
+  enum role: { general: 0, admin: 1 }
+
   mount_uploader :avatar, AvatarUploader
 
   has_many :reviews, dependent: :destroy
