@@ -2,7 +2,6 @@ class Admin::UsersController < Admin::BaseController
   layout 'admin/application'
   before_action :set_user, only: [:edit, :update, :destroy, :show, :reset_password]
   before_action :require_login
-  before_action :check_admin
 
   def index
     @users = User.all.order(created_at: :desc).page(params[:page])

@@ -16,7 +16,7 @@
           <%= link_to '投稿管理', admin_reviews_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link' %>
+          <%= button_to 'ログアウト', admin_logout_path, method: :delete, class: 'nav-link', form: { style: 'display: inline;' } %>
         </li>
       </ul>
     </div>

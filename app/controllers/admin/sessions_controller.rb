@@ -1,24 +1,24 @@
-class Admin::SessionsController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+class Admin::SessionsController < Admin::BaseController
+  skip_before_action :require_admin_login, only: %i[new create]
   skip_before_action :check_admin, only: %i[new create]
-  layout 'admin_login'
+  # layout 'admin_login'
 
   def new; end
 
   def create
-    @admin_user = login(params[:email], params[:password])
+    @admin_user = AdminUser.find_by(email: params[:email])
 
-    if @admin_user
-      redirect_to admin_root_path, success: t('.success')
+    if @admin_user && @admin_user.valid_password?(params[:password])
+      session[:admin_user_id] = @admin_user.id
+      redirect_to admin_root_path, success: t('admin.sessions.create.success')
     else
-      logout
-      flash.now[:danger] = t('.failure')
+      flash.now[:danger] = t('admin.sessions.create.failure')
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
-    logout
-    redirect_to admin_login_path, success: t('.success')
+    session.delete(:admin_user_id)
+    redirect_to admin_login_path, success: t('admin.sessions.destroy.success'), status: :see_other
   end
 end

@@ -21,11 +21,13 @@ if Rails.env.production?
 end
 
 admin_email = ENV['ADMIN_EMAIL'] || 'admin@example.com'
+admin_nickname = ENV['ADMIN_NICKNAME'] || '管理者'
 
 # User テーブルに管理者を作成
 unless User.exists?(email: admin_email, role: :admin)
   admin = User.new(
     email: admin_email,
+    nickname: admin_nickname,
     password: ENV['ADMIN_PASSWORD'] || 'SecurePassword123!',
     password_confirmation: ENV['ADMIN_PASSWORD'] || 'SecurePassword123!',
     role: :admin
@@ -34,6 +36,7 @@ unless User.exists?(email: admin_email, role: :admin)
   if admin.save
     puts "✅ 管理者ユーザーを作成しました"
     puts "   Email: #{admin.email}"
+    puts "   Nickname: #{admin.nickname}"
     puts "   Role: #{admin.role}"
   else
     puts "❌ 管理者ユーザーの作成に失敗しました"
@@ -50,6 +53,7 @@ puts "📋 現在の管理者ユーザー"
 puts "=" * 50
 User.where(role: :admin).each do |admin|
   puts "Email: #{admin.email}"
+  puts "Nickname: #{admin.nickname}"
   puts "Role: #{admin.role}"
   puts "-" * 50
 end
