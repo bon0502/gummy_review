@@ -8,3 +8,5 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 
 # 管理画面用のエントリーポイント
 pin "admin", to: "admin.js"
+pin "bootstrap" # @5.3.8
+pin "@popperjs/core", to: "@popperjs--core.js" # @2.11.8
