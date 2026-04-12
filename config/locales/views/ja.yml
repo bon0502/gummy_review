@@ -43,6 +43,14 @@ ja:
     delete_confirm: "本当に削除しますか？"
     post: "コメント投稿！"
     edit: "編集"
+    flash_message:
+      require_login: ログインしてください
+      created: "%{item}を作成しました"
+      not_created: "%{item}を作成できませんでした"
+      updated: "%{item}を更新しました"
+      not_updated: "%{item}を更新できませんでした"
+      deleted: "%{item}を削除しました"
+      not_authorized: 権限がありません
   profiles:
     show:
       title: ⭐️プロフィール⭐️
