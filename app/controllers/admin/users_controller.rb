@@ -1,7 +1,6 @@
 class Admin::UsersController < Admin::BaseController
   layout 'admin/application'
   before_action :set_user, only: [:edit, :update, :destroy, :show, :reset_password]
-  before_action :require_login
 
   def index
     @users = User.all.order(created_at: :desc).page(params[:page])
@@ -51,9 +50,5 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     params.require(:user).permit(:name, :email, :role, :password, :password_confirmation)
-  end
-
-  def check_admin
-    redirect_to root_path, alert: '管理者のみアクセスできます' unless current_user.admin?
   end
 end

@@ -8,7 +8,7 @@
           <h2>管理者ログイン</h2>
         </div>
         <div class="card-body">
-          <%= form_with url: admin_login_path, local: true do |f| %>
+          <%= form_with url: admin_login_path, local: true, data: { turbo: false } do |f| %>
             <div class="mb-3">
               <%= f.label :email, 'メールアドレス', class: 'form-label' %>
               <%= f.email_field :email, class: 'form-control', required: true, autofocus: true %>
