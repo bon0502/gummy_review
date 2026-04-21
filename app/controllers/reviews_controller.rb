@@ -14,18 +14,18 @@ class ReviewsController < ApplicationController
       katakana_keyword = flavor_keyword.hiragana_to_katakana
       hiragana_keyword = flavor_keyword.katakana_to_hiragana
 
-      @reviews = @q.result.includes(:user)
+      @reviews = @q.result.includes(:user, :main_images)
                    .where('flavor LIKE ? OR flavor LIKE ?', "%#{katakana_keyword}%", "%#{hiragana_keyword}%")
                    .order(created_at: :desc).page(params[:page]).per(9)
     else
-      @reviews = @q.result.includes(:user).order(created_at: :desc).page(params[:page]).per(9)
+      @reviews = @q.result.includes(:user, :main_images).order(created_at: :desc).page(params[:page]).per(9)
     end
   end
 
   def show
     @review = Review.find(params[:id])
     @comment = Comment.new
-    @comments = @review.comments.includes(:user).order(created_at: :desc)
+    @comments = @review.comments.includes(:user, :main_images).order(created_at: :desc)
   end
 
   def new
