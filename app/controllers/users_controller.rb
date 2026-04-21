@@ -21,6 +21,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+    # 総合投稿数
+    @total_reviews_count = @user.reviews.count
+
+    # 今月の投稿数
+    @monthly_reviews_count = @user.reviews.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+  end
+
   private
 
   def user_params
