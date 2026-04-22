@@ -23,7 +23,7 @@ class ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find(params[:id])
+    @review = Review.includes(:main_images).find(params[:id])
     @comment = Comment.new
     @comments = @review.comments.includes(:user, :main_images).order(created_at: :desc)
   end

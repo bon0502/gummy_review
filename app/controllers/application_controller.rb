@@ -2,6 +2,7 @@
 
 class ApplicationController < ActionController::Base
   before_action :require_login, unless: :admin_controller?
+  add_flash_types :success, :danger
 
   private
 
