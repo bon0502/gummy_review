@@ -5,11 +5,19 @@
         <div class="card custom-card">
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <%= image_tag @review.photo_url.url, class: "img-fluid", alt: @review.gummy_name %>
+              <% if @review.photo_url.present? && @review.photo_url.file.present? %>
+                <%= image_tag @review.photo_url.url, class: "img-fluid", alt: @review.gummy_name %>
+              <% else %>
+                <%= image_tag 'E51711FC-56D8-431F-B2C9-04124182C753.jpg', class: "img-fluid", alt: @review.gummy_name %>
+              <% end %>
             </div>
             <% @review.main_images.each do |main_image| %>
               <div class="col-md-4">
-                <%= image_tag main_image.image.url, class: "img-fluid", alt: @review.gummy_name %>
+                <% if @review.photo_url.present? && @review.photo_url.file.present? %>
+                  <%= image_tag main_image.image.url, class: "img-fluid", alt: @review.gummy_name %>
+                <% else %>
+                  <%= image_tag 'E51711FC-56D8-431F-B2C9-04124182C753.jpg', class: "img-fluid", alt: @review.gummy_name %>
+                <% end %>
               </div>
             <% end %>
           </div>

@@ -37,16 +37,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
-    @review.user_id = current_user.id
+    @review = current_user.reviews.build(review_params)
 
     if @review.save
-
-      # 複数画像の処理を追加
-      save_main_images(@review)
-
-      redirect_to review_path(@review), success: 'グミを投稿しました！'
+      redirect_to review_path(@review), success: 'グミを投稿しました!'
     else
+      Rails.logger.debug "Review errors: #{@review.errors.full_messages}"
+      @review.main_images.each_with_index do |main_image, index|
+        Rails.logger.debug "MainImage #{index} errors: #{main_image.errors.full_messages}"
+      end
+
       flash.now[:danger] = 'グミの投稿に失敗しました…'
       render :new, status: :unprocessable_entity
     end
@@ -54,13 +54,15 @@ class ReviewsController < ApplicationController
 
   def update
     @review = current_user.reviews.find(params[:id])
+
     if @review.update(review_params)
-
-      # 複数画像の処理を追加
-      save_main_images(@review)
-
-      redirect_to review_path(@review), success: 'グミを更新しました！'
+      redirect_to review_path(@review), success: 'グミを更新しました!'
     else
+      Rails.logger.debug "Review errors: #{@review.errors.full_messages}"
+      @review.main_images.each_with_index do |main_image, index|
+        Rails.logger.debug "MainImage #{index} errors: #{main_image.errors.full_messages}"
+      end
+
       flash.now[:danger] = 'グミの更新に失敗しました…'
       render :edit, status: :unprocessable_entity
     end
@@ -69,7 +71,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review = current_user.reviews.find(params[:id])
     @review.destroy
-    redirect_to reviews_path, success: 'グミを削除しました！'
+    redirect_to reviews_path, success: 'グミを削除しました!'
   end
 
   private
@@ -88,20 +90,10 @@ class ReviewsController < ApplicationController
       :manufacturer_name,
       :gummy_name_kana,
       :flavor_kana,
+      :remove_photo_url,
       main_images_attributes: [:id, :image, :_destroy]
+      # ⭐️ main_images_attributes は削除
+      # main_images_images は許可しない（別途処理する）
     )
-  end
-
-  # 複数画像を保存するメソッドを追加
-  def save_main_images(review)
-    # フォームから送られてきた複数画像を処理
-    return unless params[:review][:main_images_images].present?
-
-    params[:review][:main_images_images].each do |image|
-      # 空のファイルは無視
-      next if image.blank?
-
-      review.main_images.create(image: image)
-    end
   end
 end
