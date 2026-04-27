@@ -23,7 +23,13 @@
       <div class="col-md-4 mb-4">
         <%= link_to review_path(review), class: "card-link" do %>
           <div class="card h-100">
-            <%= image_tag review.photo_url.url, class: "card-img-top", alt: review.gummy_name %>
+             <!-- ここを修正：　画像が存在する場合のみ表示、存在しない場合はデフォルト画像　-->
+            <% if review.photo_url.present? && review.photo_url.file.present? %>
+              <%= image_tag review.photo_url.url, class: "card-img-top", alt: review.gummy_name %>
+            <% else %>
+              <!-- デフォルト画像を表示 -->
+              <%= image_tag 'E51711FC-56D8-431F-B2C9-04124182C753.jpg', class: "card-img-top", alt: review.gummy_name %>
+            <% end %>
             <div class="card-body">
               <h5 class="card-title text-center"><%= review.gummy_name %></h5>
               <p class="card-text text-center">総合評価：<%= display_star_rating(review.rating) %></p>

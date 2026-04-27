@@ -8,12 +8,20 @@
           data: {
               image_resize_target: "main",
               action: "change->image-resize#resizeMain"
-          }%>
+          },
+          accept: 'image/*' %>
   </div>
 
   <div class="form-group">
-    <%= f.label :main_images, "他のグミたち（複数選択可）" %>
-    <%= file_field_tag 'review[main_images_images][]', multiple: true, class: 'form-control' %>
+    <label for="sub_images">他のグミたち(複数選択可)</label>
+    <input type="file"
+           name="review[main_images_attributes][][image]"
+           id="sub_images"
+           class="form-control"
+           multiple
+           accept="image/*"
+           data-image-resize-target="sub"
+           data-action="change->image-resize#resizeSub">
   </div>
 
   <div class="form-group">
