@@ -22,15 +22,16 @@
     <% @reviews.each do |review| %>
       <div class="col-md-4 mb-4">
         <%= link_to review_path(review), class: "card-link" do %>
-          <div class="card h-100">
-             <!-- ここを修正：　画像が存在する場合のみ表示、存在しない場合はデフォルト画像　-->
-            <% if review.photo_url.present? && review.photo_url.file.present? %>
+          <div class="card h-100 shadow-sm hover-card">
+            <% if review.photo_url.present? %>
               <%= image_tag review.photo_url.url, class: "card-img-top", alt: review.gummy_name %>
             <% else %>
-              <!-- デフォルト画像を表示 -->
-              <%= image_tag 'E51711FC-56D8-431F-B2C9-04124182C753.jpg', class: "card-img-top", alt: review.gummy_name %>
-            <% end %>
-            <div class="card-body">
+              <!-- プレースホルダーを表示 -->
+              <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                <span class="text-white">画像なし</span>
+              </div>
+           <% end %>
+           <div class="card-body">
               <h5 class="card-title text-center"><%= review.gummy_name %></h5>
               <p class="card-text text-center">総合評価：<%= display_star_rating(review.rating) %></p>
               <p class="card-text">💚メーカー：<%= review.manufacturer_name %></p>
