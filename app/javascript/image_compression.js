@@ -12,8 +12,10 @@ document.addEventListener('turbo:load', () => {
       if (!file || !file.type.startsWith('image/')) return;
 
       const options = {
-        maxSizeMB: 0.5,
-        maxWidthOrHeight: 1200,
+        maxSizeMB: 0.2,  // 200KB以下を目指す
+        maxWidthOrHeight: 800,  // 800px以下にリサイズ
+        fileType: 'image/jpeg',  // JPEGに統一
+        initialQuality: 0.7,  // 画質を70%に設定
         useWebWorker: true
       };
 
@@ -47,9 +49,11 @@ document.addEventListener('turbo:load', () => {
       if (files.length === 0) return;
 
       const options = {
-        maxSizeMB: 0.5,
-        maxWidthOrHeight: 1200,
-        useWebWorker: true
+        maxSizeMB: 0.2,  // 200KB以下を目指す
+        maxWidthOrHeight: 800,  // 800px以下にリサイズ
+        useWebWorker: true,
+        fileType: 'image/jpeg',  // JPEGに統一
+        initialQuality: 0.7  // 画質を70%に設定
       };
 
       try {
