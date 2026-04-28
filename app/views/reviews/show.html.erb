@@ -8,19 +8,27 @@
               <% if @review.photo_url.present? && @review.photo_url.file.present? %>
                 <%= image_tag @review.photo_url.url, class: "img-fluid", alt: @review.gummy_name %>
               <% else %>
-                <%= image_tag 'E51711FC-56D8-431F-B2C9-04124182C753.jpg', class: "img-fluid", alt: @review.gummy_name %>
+                <!-- プレースホルダーを表示 -->
+                <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                  <span class="text-white">画像なし</span>
+                </div>
               <% end %>
             </div>
+
             <% @review.main_images.each do |main_image| %>
               <div class="col-md-4">
-                <% if @review.photo_url.present? && @review.photo_url.file.present? %>
+                <% if @review.photo_url.present? && main_image.image.file.present? %>
                   <%= image_tag main_image.image.url, class: "img-fluid", alt: @review.gummy_name %>
                 <% else %>
-                  <%= image_tag 'E51711FC-56D8-431F-B2C9-04124182C753.jpg', class: "img-fluid", alt: @review.gummy_name %>
+                  <!-- プレースホルダーを表示 -->
+                  <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <span class="text-white">画像なし</span>
+                  </div>
                 <% end %>
               </div>
             <% end %>
           </div>
+
           <!-- テキスト部分 -->
           <div class="card-body">
             <p class="text-center fw-bold">総合評価：<%= display_star_rating(@review.rating) %></p>
