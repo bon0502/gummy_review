@@ -1,5 +1,13 @@
 {
+  "name": "app",
+  "private": true,
+  "scripts": {
+    "build": "esbuild app/javascript/application.js --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets"
+  },
   "dependencies": {
-    "browser-image-compression": "^2.0.2"
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "browser-image-compression": "^2.0.2",
+    "esbuild": "^0.17.19"
   }
 }
