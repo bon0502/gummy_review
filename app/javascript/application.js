@@ -1,4 +1,4 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+// esbuildを使用したJavaScriptのエントリーポイント
 import "@hotwired/turbo-rails"
 import "./controllers"
-import "./image_compression"
+import "browser-image-compression"

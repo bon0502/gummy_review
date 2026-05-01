@@ -1,4 +1,7 @@
-// Import and register all your controllers from the importmap via controllers/**/*_controller
-import { application } from "controllers/application"
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+import { application } from "./application"
+
+// esbuildを使用する場合、コントローラーを明示的にインポートする必要があります
+import ImageResizeController from "./image_resize_controller"
+
+// コントローラーを登録
+application.register("image-resize", ImageResizeController)
