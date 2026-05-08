@@ -8,6 +8,8 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "browser-image-compression": "^2.0.2",
+    "chart.js": "^4.5.1",
+    "chartkick": "^5.0.1",
     "esbuild": "^0.17.19"
   }
 }

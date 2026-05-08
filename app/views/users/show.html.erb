@@ -1,0 +1,63 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <!-- アバター -->
+          <%= image_tag @user.avatar.url, class: 'rounded-circle mb-3', size: '150x150', alt: @user.nickname %>
+
+          <!-- ニックネーム -->
+          <h2 class="card-title"><%= @user.nickname %></h2>
+
+          <!-- 称号 -->
+          <% if @user.current_title.present? %>
+            <div class="badge bg-primary mb-3" style="font-size: 1.2rem;">
+              <%= @user.current_title %>
+            </div>
+          <% end %>
+
+          <!-- 統計情報（自分のプロフィールの場合のみ表示） -->
+          <% if current_user&.id == @user.id %>
+            <!-- 統計情報 -->
+            <div class="row mt-4">
+              <div class="col-4">
+                <h4><%= @user.reviews_count %></h4>
+                <p class="text-muted">レビュー数</p>
+              </div>
+              <div class="col-4">
+                <h4><%= @user.likes_count %></h4>
+                <p class="text-muted">いいね数</p>
+              </div>
+              <div class="col-4">
+                <h4><%= @user.comments_count %></h4>
+                <p class="text-muted">コメント数</p>
+              </div>
+            </div>
+            <!-- 称号詳細リンク -->
+            <% if @user.current_title.present? %>
+              <%= link_to '称号の詳細を見る', titles_user_path(@user), class: 'btn btn-outline-primary mt-3' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- ユーザーのレビュー一覧 -->
+      <div class="mt-4">
+        <h3>レビュー一覧</h3>
+        <% if @user.reviews.any? %>
+          <% @user.reviews.order(created_at: :desc).each do |review| %>
+            <div class="card mb-3">
+              <div class="card-body">
+                <%= link_to review.gummy.name, review_path(review) %>
+                <p><%= review.body %></p>
+                <small class="text-muted"><%= l review.created_at, format: :long %></small>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">まだレビューがありません</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

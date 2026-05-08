@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2026_04_11_135705) do
+ActiveRecord::Schema[7.0].define(version: 2026_05_05_093812) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -122,9 +122,15 @@ ActiveRecord::Schema[7.0].define(version: 2026_04_11_135705) do
     t.datetime "remember_me_token_expires_at"
     t.string "remember_token"
     t.integer "role", default: 0, null: false
+    t.integer "reviews_count", default: 0, null: false
+    t.decimal "avg_sweetness", precision: 3, scale: 2, default: "0.0"
+    t.decimal "avg_sourness", precision: 3, scale: 2, default: "0.0"
+    t.decimal "avg_hardness", precision: 3, scale: 2, default: "0.0"
+    t.integer "unique_gummies_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token", unique: true
     t.index ["remember_token"], name: "index_users_on_remember_token"
+    t.index ["reviews_count"], name: "index_users_on_reviews_count"
   end
 
   add_foreign_key "comments", "reviews"
