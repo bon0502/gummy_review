@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h2 class="mb-4"><%= @user.nickname %> の称号</h2>
+
+      <!-- 現在の称号 -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h4>現在の称号</h4>
+        </div>
+        <div class="card-body text-center">
+          <% if @user.current_title.present? %>
+            <h1 class="display-4"><%= @user.current_title %></h1>
+            <p class="text-muted">レビュー数: <%= @user.reviews_count %></p>
+          <% else %>
+            <p class="text-muted">まだ称号がありません</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- 称号一覧 -->
+      <div class="card">
+        <div class="card-header">
+          <h4>称号一覧</h4>
+        </div>
+        < class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>称号</th>
+                <th>必要レビュー数</th>
+                <th>ステータス</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>グミ初心者</td>
+                <td>0</td>
+                <td><%= @user.reviews_count >= 0 ? '✅ 獲得済み' : '未獲得' %></td>
+              </tr>
+              <tr>
+                <td>グミ好き</td>
+                <td>10</td>
+                <td><%= @user.reviews_count >= 10 ? '✅ 獲得済み' : '未獲得' %></td>
+              </tr>
+              <tr>
+                <td>グミマニア  </td>
+                <td>50</td>
+                <td><%= @user.reviews_count >= 50 ? '✅ 獲得済み' : '未獲得' %></td>
+              </tr>
+              <tr>
+                <td>グミマスター</td>
+                <td>100</td>
+                <td><%= @user.reviews_count >= 100 ? '✅ 獲得済み' : '未獲得' %></td>
+              </tr>
+              <tr>
+                <td>グミの神</td>
+                <td>500</td>
+                <td><%= @user.reviews_count >= 500 ? '✅ 獲得済み' : '未獲得' %></td>
+                </tr>
+              <tr>
+                <td>グミの変態</td>
+                <td>800</td>
+                <td><%= @user.reviews_count >= 800 ? '✅ 獲得済み' : '未獲得' %></td>
+              </tr>
+            </tbody>
+          </table>
