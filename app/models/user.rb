@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   mount_uploader :avatar, AvatarUploader
 
-  has_many :reviews, dependent: :destroy, counter_cache: true
+  has_many :reviews, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_reviews, through: :likes, source: :review
@@ -29,14 +29,36 @@ class User < ApplicationRecord
   # すべての称号を取得（メインメソッド）
   def all_titles
     [
-      review_count_title,           # レビュー数
+      current_title,                # 現在の称号
       *taste_preference_titles,     # 味の傾向
       *activity_and_time_titles     # 活動頻度・時間帯（キャッシュ）
     ].compact
   end
 
+    # すべての称号を種類ごとに配列で返すメソッド
+  def all_titles_with_type
+    titles = []
+
+    # レビュー数による称号(青色)
+    if current_title.present?
+      titles << { title: current_title, type: 'primary' }
+    end
+
+    # 味の傾向による称号(緑色)
+    taste_preference_titles.each do |title|
+      titles << { title: title, type: 'success' }
+    end
+
+    # 活動頻度・時間帯による称号(黄色)
+    activity_and_time_titles.each do |title|
+      titles << { title: title, type: 'warning' }
+    end
+
+    titles
+  end
+
   # レビュー数に応じた称号（DBのカウンターキャッシュを使用）
-  def review_count_title
+  def current_title
     case reviews_count
     when 800.. then "グミの変態"
     when 500.. then "グミの神"
@@ -44,7 +66,7 @@ class User < ApplicationRecord
     when 50.. then "グミマニア"
     when 10.. then "グミ好き"
     when 1.. then "グミ初心者"
-    else nil
+    else "グミ見習い"
     end
   end
 

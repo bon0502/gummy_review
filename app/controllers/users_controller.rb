@@ -30,7 +30,8 @@ class UsersController < ApplicationController
     # 称号の更新（必要に応じて）
     @user.update_review_stats if @user.reviews.any?
     # そのユーザーが投稿したレビューのみを取得
-    @reviews = @user.reviews.includes(:main_images).order(created_at: :desc).page(params[:page]).per(9)
+    @received_likes_count = @user.reviews.sum(:likes_count)
+    @reviews = @user.reviews.includes(:main_images).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def titles
@@ -38,7 +39,7 @@ class UsersController < ApplicationController
   end
 
   def likes
-    @liked_reviews = current_user.liked_reviews.includes(:user, :main_images).order(created_at: :desc).page(params[:page]).per(9)
+    @liked_reviews = current_user.liked_reviews.includes(:user, :main_images).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   private
