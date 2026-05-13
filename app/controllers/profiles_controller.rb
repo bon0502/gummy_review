@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
     # 今月の投稿数
     @monthly_reviews_count = @user.reviews.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
 
+    @received_likes_count = @user.reviews.sum(:likes_count)
     if @monthly_reviews_count > 0
       @monthly_avg_hardness = @user.reviews.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).average(:hardness).to_f.round(1)
       @monthly_avg_sweetness = @user.reviews.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).average(:sweetness).to_f.round(1)

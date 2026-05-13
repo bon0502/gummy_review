@@ -32,6 +32,12 @@
           <span class="stat-value"><%= @monthly_reviews_count %></span>件
         </div>
 
+        <!-- ✅ 受け取ったいいねの数を追加 -->
+        <div class="stat-item">
+          <span class="stat-label">いいね数</span>
+          <span class="stat-value"><%= @received_likes_count %></span>件
+        </div>
+
         <% if @monthly_reviews_count > 0 %>
           <div class="monthly-preferences mt-4">
             <h3 class="text-lg font-semibold mb-3">📊 今月の好みの傾向</h3>

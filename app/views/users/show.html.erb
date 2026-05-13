@@ -10,14 +10,28 @@
           <h2 class="card-title"><%= @user.nickname %></h2>
 
           <!-- 称号 -->
+        <div class="mb-3">
           <% if @user.current_title.present? %>
-            <div class="badge bg-primary mb-3" style="font-size: 1.2rem;">
+            <span class="title-badge title-badge-primary mb-2 me-1">
               <%= @user.current_title %>
-            </div>
+            </span>
           <% end %>
 
-          <!-- 統計情報（自分のプロフィールの場合のみ表示） -->
-          <% if current_user&.id == @user.id %>
+          <!-- 味の傾向による称号(緑色) -->
+          <% @user.taste_preference_titles.each do |title| %>
+            <span class="title-badge title-badge-success mb-2 me-1">
+              <%= title %>
+            </span>
+          <% end %>
+
+          <!-- 活動頻度・時間帯による称号(黄色) -->
+          <% @user.activity_and_time_titles.each do |title| %>
+            <span class="title-badge title-badge-warning mb-2 me-1">
+              <%= title %>
+            </span>
+          <% end %>
+        </div>
+
             <!-- 統計情報 -->
             <div class="row mt-4">
               <div class="col-4">
@@ -25,31 +39,30 @@
                 <p class="text-muted">レビュー数</p>
               </div>
               <div class="col-4">
-                <h4><%= @user.likes_count %></h4>
+                <h4><%= @received_likes_count %></h4>
                 <p class="text-muted">いいね数</p>
               </div>
-              <div class="col-4">
-                <h4><%= @user.comments_count %></h4>
-                <p class="text-muted">コメント数</p>
-              </div>
+            <div class="col-4">
+              <h4><%= @user.comments_count %></h4>
+              <p class="text-muted">コメント数</p>
             </div>
-            <!-- 称号詳細リンク -->
-            <% if @user.current_title.present? %>
-              <%= link_to '称号の詳細を見る', titles_user_path(@user), class: 'btn btn-outline-primary mt-3' %>
-            <% end %>
+           </div>
+          <!-- 称号詳細リンク -->
+          <% if @user.current_title.present? %>
+            <%= link_to '称号の詳細を見る', titles_user_path(@user), class: 'btn custom-btn' %>
           <% end %>
         </div>
       </div>
 
-      <!-- ユーザーのレビュー一覧 -->
-      <div class="mt-4">
+        <!-- ユーザーのレビュー一覧 -->
+     <div class="mt-4">
         <h3>レビュー一覧</h3>
-        <% if @user.reviews.any? %>
-          <% @user.reviews.order(created_at: :desc).each do |review| %>
+        <% if @reviews.any? %>
+          <% @reviews.order(created_at: :desc).each do |review| %>
             <div class="card mb-3">
               <div class="card-body">
-                <%= link_to review.gummy.name, review_path(review) %>
-                <p><%= review.body %></p>
+                <%= link_to review.gummy_name, review_path(review) %>
+                <p><%= review.comment %></p>
                 <small class="text-muted"><%= l review.created_at, format: :long %></small>
               </div>
             </div>
@@ -57,7 +70,151 @@
         <% else %>
           <p class="text-muted">まだレビューがありません</p>
         <% end %>
+        <%= paginate @reviews %>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+
+/* 称号バッジのスタイル */
+.title-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.title-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+  .user-stats {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+  }
+
+  .user-stats h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .stat-item {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .stat-label {
+    font-weight: 500;
+    color: #555;
+  }
+
+  .stat-value {
+    font-weight: 700;
+    color: #007bff;
+    font-size: 1.3rem;
+  }
+
+  .monthly-preferences {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+  }
+
+  .monthly-preferences h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1f2937;
+  }
+
+  .preference-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .preference-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+   }
+
+  .preference-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #374151;
+  }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  .progress-label-left {
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .progress-label-right {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  .preference-value {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  .progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background-color: #e5e7eb;
+    border-radius: 9999px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .progress-bar {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-bar-blue {
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+  }
+
+  .progress-bar-pink {
+    background: linear-gradient(90deg, #ec4899 0%, #db2777 100%);
+  }
+
+  .progress-bar-yellow {
+    background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+  }
+
+  .no-data-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #fff3cd;
+    border-radius: 4px;
+    color: #856404;
+    text-align: center;
+  }
+</style>
