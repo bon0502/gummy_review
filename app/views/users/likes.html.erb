@@ -1,28 +1,31 @@
 <div class="container pt-3">
   <div class="row">
     <div class="col-lg-10 offset-lg-1">
-      <h1 class="top-container mb-5">⭐️いいねしたグミ一覧⭐️</h1>
+      <h1 class="top-container mb-5 mt-5">⭐️ いいね一覧 ⭐️ </h1>
     </div>
   </div>
   <div class="row">
     <% @liked_reviews.each do |review| %>
       <div class="col-md-4 mb-4">
         <%= link_to review_path(review), class: "card-link" do %>
-          <div class="card h-100">
+          <div class="card h-100 hover-card">
             <%= image_tag review.photo_url.url, class: "card-img-top", alt: review.gummy_name %>
             <div class="card-body">
-              <h5 class="card-title text-center"><%= review.gummy_name %></h5>
-              <p class="card-text text-center">総合評価：<%= display_star_rating(review.rating) %></p>
-              <p class="card-text">💚メーカー：<%= review.manufacturer_name %></p>
-              <p class="card-text">🩵フレーバー：<%= review.flavor %></p>
-              <p class="card-text">🩷甘さ：<%= review.sweetness_label %></p>
-              <p class="card-text">💛酸味：<%= review.sourness_label %></p>
-              <p class="card-text">🩶硬さ：<%= review.hardness_label %></p>
+              <h5 class="card-title text-center fw-bold fs-4"><%= review.gummy_name %></h5>
+              <p class="card-text text-center fw-bold fs-4"><%= display_star_rating(review.rating) %></p>
+              <p class="card-text">💚 メーカー⟡꙳ <%= review.manufacturer_name %></p>
+              <p class="card-text">🩵 フレーバー⟡꙳ <%= review.flavor %></p>
+              <p class="card-text">🩷 甘さ⟡꙳ <%= review.sweetness_label %></p>
+              <p class="card-text">💛 酸味⟡꙳ <%= review.sourness_label %></p>
+              <p class="card-text">🩶 硬さ⟡꙳ <%= review.hardness_label %></p>
               <p class="card-text text-center">🌟💜詳細はクリック💜🌟</p>
             </div>
           </div>
         <% end %>
       </div>
     <% end %>
+      <div class="d-flex justify-content-center fw-bold fs-5 mt-4 mb-4">
+        <%= paginate @liked_reviews %>
+      </div>
   </div>
 </div>

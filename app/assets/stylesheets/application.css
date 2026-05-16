@@ -5,26 +5,49 @@
 
 .top-wrapper {
   background-image: url('DE5961DC-0CB4-4298-9932-D6BFA88A8596.jpeg');
-  height: 500px;
-  padding-top: 100px;
+  height: 650px;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.top-inner-text {
+  width: 100%;
+  text-align: center;
+  color: white;
 }
 
 .top-container {
+  width: 100%;
   text-align: center;
 }
 
+.top-image {
+  width: 200px; /* お好みのサイズに調整 */
+  height: auto;
+  margin: 20px 0; /* 上下に余白を追加 */
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* 画像を中央揃え */
+}
+
 .top-title {
-  font-size: 50px;
+  font-size: 80px;
   font-weight: bold;
-  color: #120a0b;
+  text-shadow: 0 0 1px #000;
+  color: #42d0ff;
 }
 
 .top-subtitle {
   font-size: 20px;
   margin-top: 15px;
-  color: #001aff;
+  text-shadow: 0 0 1px #000;
+  color: #8643f9;
 }
 
 .top-image {
@@ -49,6 +72,7 @@
 .header {
   background-color: #9ee9fa;
   padding: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header-container {
@@ -61,12 +85,15 @@
   text-decoration: none;
   color: #8b4789;
   font-weight: bold;
+  margin-left: 15px;
+  font-size: 1.1rem;
 }
 
 .footer {
   background-color: #9ee9fa;
   padding: 1rem;
   text-align: center;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -134,15 +161,15 @@ main.top-page {
   font-weight: bold;
 }
 
-/* 入力欄 */
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #888;
-  border-radius: 5px;
-  box-sizing: border-box;
+/* .form-control クラスを持たない要素にのみ適用 */
+input[type="text"]:not(.form-control),
+select:not(.form-control),
+textarea:not(.form-control) {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #888;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
 /* 横並び（ここ重要🔥） */
@@ -246,3 +273,19 @@ textarea {
   color: white;
 }
 
+.hover-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 柔らかい影 */
+  transition: all 0.3s ease; /* スムーズなアニメーション */
+}
+
+.hover-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* ホバー時に影を強調 */
+  transform: translateY(-5px); /* カードを少し浮かせる */
+}
+
+.star-rating {
+  font-size: 2rem; /* 星のサイズ */
+  letter-spacing: 0.2rem; /* 星の間隔 */
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4));
+}

@@ -1,7 +1,7 @@
 <div class="container pt-3">
   <div class="row">
-    <div class="col-lg-10 offset-lg-1">
-      <h1 class="top-container mb-4">⭐️<%= @review.gummy_name %>⭐️</h1>
+    <div class="col-lg-8 offset-lg-2">
+      <h1 class="top-container fw-bold mb-5 mt-5">⭐️ <%= @review.gummy_name %> ⭐️</h1>
         <div class="card custom-card">
           <div class="row justify-content-center">
             <div class="col-md-4">
@@ -31,14 +31,14 @@
 
           <!-- テキスト部分 -->
           <div class="card-body">
-            <p class="text-center fw-bold">総合評価：<%= display_star_rating(@review.rating) %></p>
-            <p class="fw-bold">💚メーカー：<%= @review.manufacturer_name %></p>
-            <p class="fw-bold">🩵フレーバー：<%= @review.flavor %></p>
-            <p class="fw-bold">🩷甘さ：<%= @review.sweetness_label %></p>
-            <p class="fw-bold">💛酸味：<%= @review.sourness_label %></p>
-            <p class="fw-bold">🩶硬さ：<%= @review.hardness_label %></p>
+            <p class="text-center fw-bold fs-4">総合評価⟡꙳ <span class="star-rating"><%= display_star_rating(@review.rating) %></span></p>
+            <p class="fw-bold">💚 メーカー⟡꙳  <%= @review.manufacturer_name %></p>
+            <p class="fw-bold">🩵 フレーバー⟡꙳  <%= @review.flavor %></p>
+            <p class="fw-bold">🩷 甘さ⟡꙳  <%= @review.sweetness_label %></p>
+            <p class="fw-bold">💛 酸味⟡꙳  <%= @review.sourness_label %></p>
+            <p class="fw-bold">🩶 硬さ⟡꙳  <%= @review.hardness_label %></p>
             <div class="card">
-              <p class="fw-bold">⭐グミの特徴⭐</p><%= @review.comment %>
+              <p class="fw-bold">⭐ グミの特徴 ⭐</p><%= @review.comment %>
             </div>
             <div class="card-footer text-muted">
               <div class="d-flex align-items-center md-2">
@@ -47,9 +47,9 @@
                 <% end %>
                 <div class="ms-3">
                   <p class="mb-0">
-                    投稿者：<%= link_to @review.user.nickname, user_path(@review.user), class: 'text-decoration-none' %>
+                    <%= link_to @review.user.nickname, user_path(@review.user), class: 'text-decoration-none' %>
                   </p>
-                  <p class="mb-0 text-muted small">投稿日：<%= @review.created_at.strftime("%Y年%m月%d日") %></p>
+                  <p class="mb-0 text-muted small"><%= @review.created_at.strftime("%Y年%m月%d日") %></p>
                 </div>
                </div>
               <% if current_user && current_user == @review.user %>
@@ -60,9 +60,9 @@
               <% end %>
               <% if logged_in? %>
                 <% if current_user.likes.exists?(review: @review) %>
-                  <%= button_to "❤️ #{@review.likes.count} いいね解除", review_like_path(@review), method: :delete, class: "btn btn-outline-danger" %>
+                  <%= button_to "♥ #{@review.likes.count} いいね解除", review_like_path(@review), method: :delete, class: "btn btn-outline-danger" %>
                 <% else %>
-                  <%= button_to "🤍 #{@review.likes.count} いいね", review_like_path(@review), method: :post, class: "btn btn-danger" %>
+                  <%= button_to "♡ #{@review.likes.count} いいね", review_like_path(@review), method: :post, class: "btn btn-danger" %>
                 <% end %>
               <% end %>
                 <div class="d-flex justify-content-center mt-3 gap-5">
@@ -90,7 +90,7 @@
             </div>
           </div>
         </div>
-       <div class="text-center mt-3">
+       <div class="text-center mb-3 mt-3">
         <%= button_tag "← 前のページに戻る", onclick: "history.back()", class: "btn custom-btn", type: "button" %>
        </div>
       </div>
