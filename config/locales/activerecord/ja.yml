@@ -4,11 +4,11 @@ ja:
       user: ユーザー
       comment: コメント
     attributes:
-      comment:
-        body: コメントを書く
       user:
         email: メールアドレス
         nickname: ニックネーム
         password: パスワード
         password_confirmation: パスワード確認
         avatar: プロフィール画像
+      comment:
+        body: コメントを書く

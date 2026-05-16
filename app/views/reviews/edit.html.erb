@@ -1,4 +1,4 @@
-<h1 class="title">🌟レビュー編集🌟</h1>
+<h1 class="title">🌟 レビュー編集 🌟</h1>
 
 <%= form_with model: @review, class: "review-form", enctype: "multipart/form-data", data: { controller: "image-resize" } do |f| %>
 
@@ -67,7 +67,7 @@
 
   <div class="form-group">
     <label>総合評価</label>
-    <%= f.select :rating, [["⭐️", 1], ["⭐⭐", 2], ["⭐⭐⭐", 3], ["⭐⭐⭐⭐", 4], ["⭐⭐⭐⭐⭐", 5]] %>
+    <%= f.select :rating, [["⭐️", 1], ["⭐️⭐️", 2], ["⭐️⭐️⭐️", 3], ["⭐️⭐️⭐️⭐️", 4], ["⭐️⭐️⭐️⭐️⭐️", 5]] %>
   </div>
 
   <!-- 横並び -->

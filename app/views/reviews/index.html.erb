@@ -32,13 +32,13 @@
               </div>
            <% end %>
            <div class="card-body">
-              <h5 class="card-title text-center"><%= review.gummy_name %></h5>
-              <p class="card-text text-center">総合評価：<%= display_star_rating(review.rating) %></p>
-              <p class="card-text">💚メーカー：<%= review.manufacturer_name %></p>
-              <p class="card-text">🩵フレーバー：<%= review.flavor %></p>
-              <p class="card-text">🩷甘さ：<%= review.sweetness_label %></p>
-              <p class="card-text">💛酸味：<%= review.sourness_label %></p>
-              <p class="card-text">🩶硬さ：<%= review.hardness_label %></p>
+              <h5 class="card-title text-center fw-bold fs-4"><%= review.gummy_name %></h5>
+              <p class="card-text text-center fw-bold fs-4"><%= display_star_rating(review.rating) %></p>
+              <p class="card-text">💚 メーカー⟡꙳ <%= review.manufacturer_name %></p>
+              <p class="card-text">🩵 フレーバー⟡꙳ <%= review.flavor %></p>
+              <p class="card-text">🩷 甘さ⟡꙳ <%= review.sweetness_label %></p>
+              <p class="card-text">💛 酸味⟡꙳ <%= review.sourness_label %></p>
+              <p class="card-text">🩶 硬さ⟡꙳ <%= review.hardness_label %></p>
               <p class="card-text text-center">🌟💜詳細はクリック💜🌟</p>
             </div>
           </div>
@@ -46,7 +46,7 @@
       </div>
     <% end %>
   </div>
-  <div class="d-flex justify-content-center mt-4">
+  <div class="d-flex justify-content-center fw-bold fs-5 mt-4 mb-4">
     <%= paginate @reviews %>
   </div>
 </div>
