@@ -75,7 +75,7 @@
           <%= paginate @reviews %>
         </div>
         <div class="mb-3 mt-3">
-          <%= button_tag "← 前のページに戻る", onclick: "history.back()", class: "btn custom-btn", type: "button" %>
+          <%= link_to "← グミ一覧に戻る", reviews_path, class: "btn custom-btn", type: "button" %>
         </div>
       </div>
     </div>

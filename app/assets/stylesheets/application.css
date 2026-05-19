@@ -289,3 +289,210 @@ textarea {
   display: inline-block;
   filter: drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4));
 }
+
+/* メインコンテンツとサイドバーを横並びに */
+.content-with-sidebar {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* グミ一覧のメインエリア */
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 1位の特別スタイル */
+.ranking-item.ranking-1 {
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe4b3 100%);
+  border: 2px solid #ffd700;
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0%, 100% {
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(255, 215, 0, 0.6);
+  }
+}
+
+.ranking-item.ranking-1 .rank {
+  font-size: 1.2rem;
+}
+
+/* 2位の特別スタイル */
+.ranking-item.ranking-2 {
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  border: 2px solid #c0c0c0;
+  box-shadow: 0 3px 6px rgba(192, 192, 192, 0.3);
+}
+
+.ranking-item.ranking-2 .rank {
+  font-size: 1rem;
+}
+
+/* 3位の特別スタイル */
+.ranking-item.ranking-3 {
+  background: linear-gradient(135deg, #fff5f0 0%, #ffe4d9 100%);
+  border: 2px solid #cd7f32;
+  box-shadow: 0 3px 6px rgba(205, 127, 50, 0.3);
+}
+
+.ranking-item.ranking-3 .rank {
+  font-size: 1rem;
+}
+
+/* ランキングがない場合 */
+.no-ranking {
+  text-align: center;
+  color: #999;
+  padding: 1rem;
+}
+
+/* サイドバー */
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  top: 20px;
+  align-self: flex-start;
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ランキングウィジェット */
+.ranking-widget {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ranking-widget h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+  border-bottom: 2px solid #d400ff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ランキングリスト */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ranking-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.ranking-item:hover {
+  background: #e9ecef;
+  transform: translateX(4px);
+}
+
+/* ランク表示 */
+.ranking-item .rank {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 40px;
+  text-align: center;
+}
+
+/* 1位のスタイル */
+.ranking-item.ranking-1 {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+  border: 2px solid #ffa500;
+}
+
+/* 2位のスタイル */
+.ranking-item.ranking-2 {
+  background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+  border: 2px solid #c0c0c0;
+}
+
+/* 3位のスタイル */
+.ranking-item.ranking-3 {
+  background: linear-gradient(135deg, #fff5e6 0%, #fff 100%);
+  border: 2px solid #cd7f32;
+}
+
+/* ⭐️ 4位以降のフォントサイズを追加 */
+.ranking-item:not(.ranking-1):not(.ranking-2):not(.ranking-3) .rank {
+  font-size: 1rem;  /* 3位と同じサイズにする */
+}
+
+/* ユーザー名 */
+.ranking-item .user-nickname {
+  flex: 1;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.ranking-item .user-nickname:hover {
+  color: #d900ff;
+}
+
+/* レビュー情報（いいねランキング用） */
+.review-info {
+  flex: 1;  /* 中央の要素が伸縮する */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.review-info .gummy-name {
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+}
+
+.review-info .gummy-name:hover {
+  color: #d900ff;
+}
+
+.review-info .user-name-small {
+  font-size: 0.85rem;
+  color: #9f9f9f;
+}
+
+/* いいね数を右寄せ */
+.ranking-item .count {
+  font-weight: bold;
+  color: #d900ff;
+  margin-left: auto;  /* ⭐️ 右寄せ */
+}
+
+/* グミ一覧のカード画像 */
+.card-img-top {
+  width: 100%;
+  height: 250px;  /* ⭐️ 追加 */
+  object-fit: cover;  /* ⭐️ 追加 */
+}
+
+/* 画像がない場合の代替表示 */
+.card-img-top.bg-secondary {
+  height: 250px;  /* ⭐️ 追加 */
+}
+
+/* 画像なしの背景色 */
+.no-image-placeholder {
+  background-color: #d084ff;  /* お好きな色に変更 */
+  height: 250px;
+}

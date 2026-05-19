@@ -1,14 +1,11 @@
 <div class="container pt-3">
   <div class="row">
     <div class="col-lg-10 offset-lg-1">
-          <!-- ここに検索フォームを追加 -->
+      <!-- 検索フォーム -->
       <%= search_form_for @q, url: reviews_path do |f| %>
         <div style="display: flex; gap: 10px;">
-          <!-- テキスト入力 -->
           <%= f.search_field :gummy_name_cont, placeholder: "グミの名前" %>
           <%= f.search_field :flavor_cont, placeholder: "フレーバー" %>
-
-          <!-- プルダウン -->
           <%= f.select :sweetness_eq, [["甘くない", 1], ["甘さ控えめ", 2], ["甘い", 3], ["少し甘い", 4], ["とても甘い", 5]], include_blank: "甘さは？" %>
           <%= f.select :sourness_eq, [["酸っぱくない", 1], ["酸っぱさ控えめ", 2], ["酸っぱい", 3], ["少し酸っぱい", 4], ["とても酸っぱい", 5]], include_blank: "酸っぱさは？" %>
           <%= f.select :hardness_eq, [["とてもソフト", 1], ["ソフト", 2], ["普通", 3], ["ハード", 4], ["とてもハード", 5]], include_blank: "硬さは？" %>
@@ -18,35 +15,107 @@
       <h1 class="top-container mb-5 mt-5">⭐️グミ一覧⭐️</h1>
     </div>
   </div>
-  <div class="row">
-    <% @reviews.each do |review| %>
-      <div class="col-md-4 mb-4">
-        <%= link_to review_path(review), class: "card-link" do %>
-          <div class="card h-100 shadow-sm hover-card">
-            <% if review.photo_url.present? %>
-              <%= image_tag review.photo_url.url, class: "card-img-top", alt: review.gummy_name %>
-            <% else %>
-              <!-- プレースホルダーを表示 -->
-              <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
-                <span class="text-white">画像なし</span>
+
+  <!-- メインコンテンツとサイドバーを横並びに -->
+  <div class="content-with-sidebar">
+    <!-- グミ一覧のメインエリア -->
+    <div class="main-content">
+      <div class="row">
+        <% @reviews.each do |review| %>
+          <div class="col-md-6 col-lg-4 mb-4">
+            <%= link_to review_path(review), class: "card-link" do %>
+              <div class="card h-100 shadow-sm hover-card">
+                <% if review.photo_url.present? %>
+                  <%= image_tag review.photo_url.url, class: "card-img-top", alt: review.gummy_name %>
+                <% else %>
+                  <div class="card-img-top no-image-placeholder d-flex align-items-center justify-content-center" style="height: 250px;">
+                    <span class="text-white">画像なし</span>
+                  </div>
+                <% end %>
+                <div class="card-body">
+                  <h5 class="card-title text-center fw-bold fs-4"><%= review.gummy_name %></h5>
+                  <p class="card-text text-center fw-bold fs-4"><%= display_star_rating(review.rating) %></p>
+                  <p class="card-text">💚 メーカー⟡꙳ <%= review.manufacturer_name %></p>
+                  <p class="card-text">🩵 フレーバー⟡꙳ <%= review.flavor %></p>
+                  <p class="card-text">🩷 甘さ⟡꙳ <%= review.sweetness_label %></p>
+                  <p class="card-text">💛 酸味⟡꙳ <%= review.sourness_label %></p>
+                  <p class="card-text">🩶 硬さ⟡꙳ <%= review.hardness_label %></p>
+                  <p class="card-text text-center">🌟💜詳細はクリック💜🌟</p>
+                </div>
               </div>
-           <% end %>
-           <div class="card-body">
-              <h5 class="card-title text-center fw-bold fs-4"><%= review.gummy_name %></h5>
-              <p class="card-text text-center fw-bold fs-4"><%= display_star_rating(review.rating) %></p>
-              <p class="card-text">💚 メーカー⟡꙳ <%= review.manufacturer_name %></p>
-              <p class="card-text">🩵 フレーバー⟡꙳ <%= review.flavor %></p>
-              <p class="card-text">🩷 甘さ⟡꙳ <%= review.sweetness_label %></p>
-              <p class="card-text">💛 酸味⟡꙳ <%= review.sourness_label %></p>
-              <p class="card-text">🩶 硬さ⟡꙳ <%= review.hardness_label %></p>
-              <p class="card-text text-center">🌟💜詳細はクリック💜🌟</p>
-            </div>
+            <% end %>
           </div>
         <% end %>
       </div>
-    <% end %>
-  </div>
-  <div class="d-flex justify-content-center fw-bold fs-5 mt-4 mb-4">
-    <%= paginate @reviews %>
+
+      <!-- ページネーション -->
+      <div class="d-flex justify-content-center fw-bold fs-5 mt-4 mb-4">
+        <%= paginate @reviews %>
+      </div>
+    </div>
+
+    <!-- ランキングのサイドバー -->
+    <aside class="sidebar">
+      <div class="ranking-widget">
+        <h2>★ 今月の投稿ランキング ★</h2>
+        <div class="ranking-list">
+          <% if @ranking_users.present? %>
+            <% @ranking_users.each.with_index(1) do |user, rank| %>
+              <div class="ranking-item ranking-<%= rank %>">
+                <span class="rank">
+                  <% if rank == 1 %>
+                    🥇 1位
+                  <% elsif rank == 2 %>
+                    🥈 2位
+                  <% elsif rank == 3 %>
+                    🥉 3位
+                  <% else %>
+                    <%= rank %>位
+                  <% end %>
+                </span>
+                <%= link_to user.nickname, user_path(id: user.id), class: "user-nickname" %>
+                <span class="count"><%= user.review_count %>件</span>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="no-ranking">今月の投稿はまだありません</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- ⭐️ いいねランキング -->
+      <div class="ranking-widget">
+        <h2>♥ いいねランキング </h2>
+        <div class="ranking-list">
+          <% if @like_review_users.present? %>
+            <% @like_review_users.each.with_index(1) do |review, rank| %>
+              <div class="ranking-item ranking-<%= rank %>">
+                <span class="rank">
+                  <% if rank == 1 %>
+                    🥇 1位
+                  <% elsif rank == 2 %>
+                    🥈 2位
+                  <% elsif rank == 3 %>
+                    🥉 3位
+                  <% else %>
+                    <%= rank %>位
+                  <% end %>
+                </span>
+                <div class="review-info">
+                  <%= link_to review.gummy_name, review_path(review), class: "gummy-name" %>
+                  <span class="user-name-small">by <%= review.user.nickname %></span>
+                </div>
+                <span class="count">♥
+                  <i class="fas fa-heart"></i>
+                  <%= review.like_count %>
+                </span>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="no-ranking">いいねはまだありません</p>
+          <% end %>
+        </div>
+      </div>
+    </aside>
   </div>
 </div>
