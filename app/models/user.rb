@@ -97,6 +97,21 @@ class User < ApplicationRecord
     )
   end
 
+    # 当月の投稿数を取得
+  def monthly_review_count
+    reviews.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+  end
+
+  # 月次ランキングを取得（クラスメソッド）
+  def self.monthly_ranking(limit: 10)
+    joins(:reviews)
+      .where(reviews: { created_at: Time.current.beginning_of_month..Time.current.end_of_month })
+      .group('users.id')
+      .select('users.*, COUNT(reviews.id) as review_count')
+      .order('review_count DESC')
+      .limit(limit)
+  end
+
   private
 
   # 複雑な計算ロジック（キャッシュされる）

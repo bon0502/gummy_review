@@ -9,7 +9,7 @@
                 <%= image_tag @review.photo_url.url, class: "img-fluid", alt: @review.gummy_name %>
               <% else %>
                 <!-- プレースホルダーを表示 -->
-                <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                <div class="no-image-placeholder d-flex align-items-center justify-content-center" style="height: 200px;">
                   <span class="text-white">画像なし</span>
                 </div>
               <% end %>
@@ -21,7 +21,7 @@
                   <%= image_tag main_image.image.url, class: "img-fluid", alt: @review.gummy_name %>
                 <% else %>
                   <!-- プレースホルダーを表示 -->
-                  <div class="bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                  <div class="no-image-placeholder d-flex align-items-center justify-content-center" style="height: 200px;">
                     <span class="text-white">画像なし</span>
                   </div>
                 <% end %>

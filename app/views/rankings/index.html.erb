@@ -1,0 +1,15 @@
+<h1><%= @current_month %>の投稿ランキング</h1>
+
+<div class="ranking-list">
+  <% @ranking_users.each.with_index(1) do |user, rank| %>
+    <div class="ranking-item">
+      <span class="rank"><%= rank %>位</span>
+      <span class="user-name"><%= user.name %></span>
+      <span class="review-count"><%= user.review_count %>件</span>
+    </div>
+  <% end %>
+</div>
+
+<p class="ranking-note">
+  ※ランキングは毎月1日にリセットされます
+</p>

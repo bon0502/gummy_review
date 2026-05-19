@@ -20,6 +20,22 @@ class ReviewsController < ApplicationController
     else
       @reviews = @q.result.includes(:user, :main_images).order(created_at: :desc).page(params[:page]).per(9)
     end
+
+    # ⭐️ 今月の投稿ランキングを取得
+    @ranking_users = User.joins(:reviews)
+                         .where(reviews: { created_at: Time.zone.now.beginning_of_month..Time.zone.now.end_of_month })
+                         .group('users.id')
+                         .select('users.*, COUNT(reviews.id) as review_count')
+                         .order('review_count DESC')
+                         .limit(10)
+
+    # ⭐️ 今月のいいねランキングを取得
+    @like_review_users = Review.joins(:likes)
+                               .group('reviews.id')
+                               .select('reviews.*, COUNT(likes.id) as like_count')
+                               .order('like_count DESC')
+                               .includes(:user)
+                               .limit(10)
   end
 
   def show
