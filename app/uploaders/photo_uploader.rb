@@ -21,7 +21,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
     %w[jpg jpeg gif png]
   end
 
-  def default_url
-    'E51711FC-56D8-431F-B2C9-04124182C753.jpeg'
+  def default_url(*args)
+    ActionController::Base.helpers.asset_path("gummy.jpeg")
   end
 end

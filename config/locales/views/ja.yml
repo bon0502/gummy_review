@@ -42,7 +42,7 @@ ja:
   defaults:
     delete_confirm: "本当に削除しますか？"
     post: "コメント投稿！"
-    edit: "編集"
+    edit: "プロフィール・パスワード編集"
     flash_message:
       require_login: ログインしてください
       created: "%{item}を作成しました"
