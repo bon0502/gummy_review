@@ -62,6 +62,25 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "gummy_review_production"
 
+  # メール送信の設定
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  # 本番環境のホスト名を設定（デプロイ先のドメインに置き換えてください）
+  config.action_mailer.default_url_options = { host: 'gummy-review.onrender.com', protocol: 'https' }
+
+  # AWS SESのSMTP設定
+  config.action_mailer.smtp_settings = {
+    address: 'email-smtp.ap-northeast-1.amazonaws.com',  # 選択したリージョンに応じて変更
+    port: 587,
+    domain: 'gummy-review.onrender.com',  # あなたのドメインに置き換え
+    user_name: ENV['SES_SMTP_USERNAME'],  # 環境変数から取得
+    password: ENV['SES_SMTP_PASSWORD'], # 環境変数から取得
+    authentication: :login,
+    enable_starttls_auto: true
+  }
+
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

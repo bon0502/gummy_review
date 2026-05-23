@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create destroy]
   end
 
+  resources :password_resets, only: %i[new create edit update]
+
   namespace :admin do
     root 'dashboards#index'  # ← ダッシュボードを管理画面のトップページに設定
 
@@ -42,4 +44,8 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
   get 'likes', to: 'users#likes'
+
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
