@@ -73,16 +73,14 @@ Rails.application.configure do
   # AWS SESのSMTP設定
   config.action_mailer.smtp_settings = {
     address: 'email-smtp.ap-northeast-1.amazonaws.com',  # 選択したリージョンに応じて変更
-    port: 465,
+    port: 587,
     domain: 'gummy-review.onrender.com',  # あなたのドメインに置き換え
     user_name: ENV['SES_SMTP_USERNAME'],  # 環境変数から取得
     password: ENV['SES_SMTP_PASSWORD'], # 環境変数から取得
     authentication: :login,
-    # enable_starttls_auto: true,
-    tls: true,
-    ssl: true,
-    open_timeout: 10,
-    read_timeout: 10
+    enable_starttls_auto: true,
+    open_timeout: 30,
+    read_timeout: 30
   }
 
   config.action_mailer.perform_caching = false
