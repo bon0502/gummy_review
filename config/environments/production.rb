@@ -78,7 +78,9 @@ Rails.application.configure do
     user_name: ENV['SES_SMTP_USERNAME'],  # 環境変数から取得
     password: ENV['SES_SMTP_PASSWORD'], # 環境変数から取得
     authentication: :login,
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    open_timeout: 10,
+    read_timeout: 10
   }
 
   config.action_mailer.perform_caching = false
