@@ -73,7 +73,7 @@ Rails.application.configure do
   # AWS SESのSMTP設定
   config.action_mailer.smtp_settings = {
     address: 'email-smtp.ap-northeast-1.amazonaws.com',  # 選択したリージョンに応じて変更
-    port: 587,
+    port: 2587,
     domain: 'gummy-review.onrender.com',  # あなたのドメインに置き換え
     user_name: ENV['SES_SMTP_USERNAME'],  # 環境変数から取得
     password: ENV['SES_SMTP_PASSWORD'], # 環境変数から取得
