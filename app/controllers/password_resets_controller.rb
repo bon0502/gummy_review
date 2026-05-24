@@ -8,7 +8,7 @@ class PasswordResetsController < ApplicationController
   def create
     @user = User.find_by(email: params[:email])
     if @user
-      @user.deliver_reset_password_instructions!
+      UserMailer.reset_password_email(@user).deliver_later
       redirect_to login_path, success: 'パスワードリセットのメールを送信しました。メールを確認してください。'
     else
       flash.now[:danger] = 'メールアドレスが見つかりませんでした。'
