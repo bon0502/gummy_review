@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-6 col-lg-4 mx-auto">
       <h1>🧸 パスワードリセット</h1>
-      <p>登録したメールアドレスを入力してください。パスワードリセットの手順を記載したメールをお送りします。</p>
+      <p>登録したメールアドレスを入力してください。パスワードリセットの手順を記載したメールをお送りします。迷惑メールに入りやすいので、そちらもご確認ください。</p>
 
       <%= form_with url: password_resets_path, method: :post do |f| %>
         <%= render 'shared/error_messages', object: @user %>
