@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user
       UserMailer.reset_password_email(@user).deliver_later
-      redirect_to login_path, success: 'パスワードリセットのメールを送信しました。メールを確認してください。'
+      redirect_to login_path, success: 'パスワードリセットのメールを送信しました。メールをご確認してください。'
     else
       flash.now[:danger] = 'メールアドレスが見つかりませんでした。'
       render :new, status: :unprocessable_entity
@@ -32,9 +32,9 @@ class PasswordResetsController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
 
     if @user.change_password(params[:user][:password])
-      redirect_to login_path, success: 'パスワードをリセットしました。新しいパスワードでログインしてください。'
+      redirect_to login_path, success: 'パスワードを変更しました。新しいパスワードでログインしてください。'
     else
-      flash.now[:danger] = 'パスワードのリセットに失敗しました。'
+      flash.now[:danger] = 'パスワードの変更に失敗しました。'
       render :edit, status: :unprocessable_entity
     end
   end
