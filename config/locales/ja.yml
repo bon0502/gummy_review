@@ -4,3 +4,9 @@ ja:
       role:
         general: "一般"
         admin: "管理者"
+  sessions:
+    new:
+      to_register_page: '登録ページへ'
+      password_forget: 'パスワードをお忘れの方はこちら'
+    destroy:
+      success: 'ログアウトしました'

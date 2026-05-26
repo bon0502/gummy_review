@@ -496,3 +496,41 @@ textarea {
   background-color: #d084ff;  /* お好きな色に変更 */
   height: 250px;
 }
+
+/* Google ログインボタンのスタイル */
+.btn-outline-danger {
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  background-color: #fff;
+  transition: all 0.3s;
+  border-radius: 5px; /* 角を少し丸く */
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* 区切り線のスタイル */
+.login-divider {
+  position: relative;
+  text-align: center;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: #dee2e6;
+}
+
+.login-divider::before {
+  left: 0;
+}
+
+.login-divider::after {
+  right: 0;
+}
