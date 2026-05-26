@@ -22,6 +22,25 @@ class User < ApplicationRecord
     id == object.user_id
   end
 
+    # Google OAuth用のメソッド
+  def self.find_or_create_from_google(user_info)
+    email = user_info['info']['email']
+    user = User.find_by(email: email)
+
+    unless user
+      user = User.create(
+        email: email,
+        first_name: user_info['info']['first_name'] || user_info['info']['name'],
+        last_name: user_info['info']['last_name'] || '',
+        # パスワードはランダムに生成(OAuth認証なので使用しない)
+        password: SecureRandom.hex(10),
+        password_confirmation: SecureRandom.hex(10)
+      )
+    end
+
+    user
+  end
+
   # ========================================
   # ここから称号機能のコードを追加
   # ========================================

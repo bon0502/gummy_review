@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   # root "articles#index"
   root 'static_pages#top'
 
+    # OmniAuthのコールバック用ルーティング
+  get '/auth/:provider/callback', to: 'omniauth_callbacks#google_oauth2'
+  get '/auth/failure', to: 'omniauth_callbacks#failure'
+
+  # ログイン・ログアウト用ルーティング
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
   resources :users, only: %i[new create show] do
     member do
       get :titles
@@ -40,9 +49,9 @@ Rails.application.routes.draw do
   end
 
   resources :gummies, only: %i[index]
-  get 'login', to: 'user_sessions#new'
-  post 'login', to: 'user_sessions#create'
-  delete 'logout', to: 'user_sessions#destroy'
+  # get 'login', to: 'user_sessions#new'
+  # post 'login', to: 'user_sessions#create'
+  # delete 'logout', to: 'user_sessions#destroy'
   get 'likes', to: 'users#likes'
 
   if Rails.env.development?
