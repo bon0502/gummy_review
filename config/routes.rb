@@ -15,6 +15,12 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
+  # プライバシーポリシーのルート
+  get 'privacy', to: 'pages#privacy'
+
+  # 利用規約のルート
+  get 'terms', to: 'pages#terms'
+
   resources :users, only: %i[new create show] do
     member do
       get :titles

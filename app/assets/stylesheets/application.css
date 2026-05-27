@@ -534,3 +534,11 @@ textarea {
 .login-divider::after {
   right: 0;
 }
+
+.text-mycolor {
+  color: #a02cff;
+}
+
+.text-mycolor:hover {
+  color: #d900ff;
+}
