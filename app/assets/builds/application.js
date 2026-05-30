@@ -29524,6 +29524,117 @@
 
   // node_modules/chartkick/chart.js/chart.esm.js
   Chartkick.use(auto_default);
+
+  // app/javascript/application.js
+  function showGummyLoading() {
+    const overlay = document.getElementById("gummyLoadingOverlay");
+    if (overlay) {
+      overlay.classList.remove("hidden");
+    }
+  }
+  function hideGummyLoading() {
+    const overlay = document.getElementById("gummyLoadingOverlay");
+    if (overlay) {
+      overlay.classList.add("hidden");
+    }
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    hideGummyLoading();
+    const forms = document.querySelectorAll("form");
+    forms.forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        showGummyLoading();
+      });
+    });
+  });
+  document.addEventListener("turbo:click", () => {
+    showGummyLoading();
+  });
+  document.addEventListener("turbo:load", () => {
+    hideGummyLoading();
+  });
+  document.addEventListener("turbo:submit-start", () => {
+    showGummyLoading();
+  });
+  document.addEventListener("turbo:submit-end", () => {
+    hideGummyLoading();
+  });
+  var loadingMessages = [
+    "\u8AAD\u307F\u8FBC\u307F\u4E2D...\u2601\uFE0F",
+    "\u3061\u3087\u3063\u3068\u5F85\u3063\u3066\u306D\u30B0\u30DF\u304C\u9003\u3052\u307E\u3057\u305F!\u8FFD\u3044\u304B\u3051\u4E2D\u{1F3C3}\u200D\u2642\uFE0F",
+    "\u30B0\u30DF\u305F\u3061\u304C\u4E26\u3076\u9806\u756A\u3067\u63C9\u3081\u3066\u3044\u307E\u3059\u{1F633}",
+    "\u30B0\u30DF\u306E\u6C17\u6301\u3061\u3092\u78BA\u8A8D\u4E2D\u{1F914}",
+    "\u30B0\u30DF\u4F1A\u8B70\u3092\u958B\u50AC\u3057\u3066\u3044\u307E\u3059\u{1F4DD}",
+    "\u30B0\u30DF\u304C\u30C0\u30F3\u30B9\u3057\u3066\u3044\u308B\u306E\u3092\u898B\u5B88\u3063\u3066\u3044\u307E\u3059\u{1F483}",
+    "\u30B0\u30DF\u306E\u884C\u5217\u304C\u3067\u304D\u3066\u3044\u307E\u3059\u{1F36C}",
+    "\u30B0\u30DF\u306E\u6E96\u5099\u304C\u6574\u3046\u307E\u3067\u5C11\u3005\u304A\u5F85\u3061\u304F\u3060\u3055\u3044\u23F3",
+    "\u30B0\u30DF\u306E\u4E16\u754C\u306B\u65C5\u7ACB\u3063\u3066\u3044\u307E\u3059\u{1F30D}",
+    "\u30B0\u30DF\u304C\u3053\u3061\u3089\u3092\u898B\u3066\u3044\u307E\u3059\u{1F440}"
+  ];
+  var messageInterval = null;
+  function getRandomMessage() {
+    const randomIndex = Math.floor(Math.random() * loadingMessages.length);
+    return loadingMessages[randomIndex];
+  }
+  function changeMessageWithFade() {
+    const loadingMessage = document.getElementById("loadingMessage");
+    if (!loadingMessage)
+      return;
+    loadingMessage.style.opacity = "0";
+    setTimeout(() => {
+      loadingMessage.textContent = getRandomMessage();
+      loadingMessage.style.opacity = "1";
+    }, 300);
+  }
+  function startMessageRotation() {
+    const loadingMessage = document.getElementById("loadingMessage");
+    if (!loadingMessage)
+      return;
+    if (messageInterval) {
+      clearInterval(messageInterval);
+    }
+    loadingMessage.textContent = getRandomMessage();
+    setTimeout(() => {
+      changeMessageWithFade();
+      messageInterval = setInterval(changeMessageWithFade, 2500);
+    }, 1500);
+  }
+  function stopMessageRotation() {
+    if (messageInterval) {
+      clearInterval(messageInterval);
+      messageInterval = null;
+    }
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    const overlay = document.getElementById("gummyLoadingOverlay");
+    if (overlay) {
+      overlay.classList.remove("hidden");
+      startMessageRotation();
+    }
+  });
+  window.addEventListener("load", () => {
+    const overlay = document.getElementById("gummyLoadingOverlay");
+    if (overlay) {
+      setTimeout(() => {
+        overlay.classList.add("hidden");
+        stopMessageRotation();
+      }, 4500);
+    }
+  });
+  document.addEventListener("turbo:before-fetch-request", () => {
+    const overlay = document.getElementById("gummyLoadingOverlay");
+    if (overlay) {
+      overlay.classList.remove("hidden");
+      startMessageRotation();
+    }
+  });
+  document.addEventListener("turbo:load", () => {
+    const overlay = document.getElementById("gummyLoadingOverlay");
+    if (overlay) {
+      overlay.classList.add("hidden");
+      stopMessageRotation();
+    }
+  });
 })();
 /*! Bundled license information:
 
