@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </head>
   <body>
+
     <% if logged_in? %>
       <%= render "shared/header" %>
     <% else %>
@@ -38,5 +39,23 @@
     </main>
 
     <%= render "shared/footer" %>
+
+    <div class="gummy-loading-overlay" id="gummyLoadingOverlay">
+      <%# 背景のキラキラ用コンテナ %>
+      <div class="sparkles-container" id="sparklesContainer"></div>
+
+      <%# グミコンテナ %>
+      <div class="gummy-container">
+        <div class="gummy" data-color="red"></div>
+        <div class="gummy" data-color="orange"></div>
+        <div class="gummy" data-color="yellow"></div>
+        <div class="gummy" data-color="green"></div>
+        <div class="gummy" data-color="blue"></div>
+        <div class="gummy" data-color="indigo"></div>
+        <div class="gummy" data-color="purple"></div>
+      </div>
+      <%# メッセージ表示エリア %>
+      <div class="loading-message" id="loadingMessage">読み込み中...</div>
+    </div>
   </body>
 </html>
