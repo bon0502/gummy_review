@@ -29538,26 +29538,25 @@
       overlay.classList.add("hidden");
     }
   }
-  document.addEventListener("DOMContentLoaded", () => {
-    hideGummyLoading();
-    const forms = document.querySelectorAll("form");
-    forms.forEach((form) => {
-      form.addEventListener("submit", (event) => {
-        showGummyLoading();
-      });
-    });
-  });
-  document.addEventListener("turbo:click", () => {
-    showGummyLoading();
-  });
-  document.addEventListener("turbo:load", () => {
-    hideGummyLoading();
-  });
   document.addEventListener("turbo:submit-start", () => {
     showGummyLoading();
+    startMessageRotation();
   });
   document.addEventListener("turbo:submit-end", () => {
     hideGummyLoading();
+    stopMessageRotation();
+  });
+  document.addEventListener("turbo:render", () => {
+    hideGummyLoading();
+    stopMessageRotation();
+  });
+  document.addEventListener("turbo:before-fetch-request", () => {
+    showGummyLoading();
+    startMessageRotation();
+  });
+  document.addEventListener("turbo:load", () => {
+    hideGummyLoading();
+    stopMessageRotation();
   });
   var loadingMessages = [
     "\u8AAD\u307F\u8FBC\u307F\u4E2D...\u2601\uFE0F",
@@ -29619,20 +29618,6 @@
         overlay.classList.add("hidden");
         stopMessageRotation();
       }, 4500);
-    }
-  });
-  document.addEventListener("turbo:before-fetch-request", () => {
-    const overlay = document.getElementById("gummyLoadingOverlay");
-    if (overlay) {
-      overlay.classList.remove("hidden");
-      startMessageRotation();
-    }
-  });
-  document.addEventListener("turbo:load", () => {
-    const overlay = document.getElementById("gummyLoadingOverlay");
-    if (overlay) {
-      overlay.classList.add("hidden");
-      stopMessageRotation();
     }
   });
 })();

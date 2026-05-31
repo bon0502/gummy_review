@@ -69,3 +69,12 @@ ja:
         failure: ログインに失敗しました
       destroy:
         success: ログアウトしました
+  reviews:
+    index:
+      title: ⭐️グミ一覧⭐️
+    show:
+      title: ⭐️グミ詳細⭐️
+    new:
+      title: ⭐️グミ投稿⭐️
+    edit:
+      title: ⭐️グミ編集⭐️

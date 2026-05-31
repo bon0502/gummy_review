@@ -1,5 +1,5 @@
-
-<h1 class="title">🌟 レビュー投稿 🌟</h1>
+<% content_for :title, t('.title') %>
+<h1 class="title">🌟 グミ投稿 🌟</h1>
 
 <%= form_with model: @review, class: "review-form", enctype: "multipart/form-data", data: { controller: "image-resize" } do |f| %>
 
