@@ -20,39 +20,34 @@ function hideGummyLoading() {
   }
 }
 
-// ページ読み込み完了時の処理
-document.addEventListener('DOMContentLoaded', () => {
-  // ページが完全に読み込まれたらローディングを非表示
-  hideGummyLoading();
-
-  // フォーム送信時にローディングを表示
-  const forms = document.querySelectorAll('form');
-  forms.forEach(form => {
-    form.addEventListener('submit', (event) => {
-      showGummyLoading();
-    });
-  });
-});
-
-// Turbo使用時の制御
-// リンクをクリックした時にローディングを表示
-document.addEventListener('turbo:click', () => {
-  showGummyLoading();
-});
-
-// ページ遷移が完了したらローディングを非表示
-document.addEventListener('turbo:load', () => {
-  hideGummyLoading();
-});
-
-// フォーム送信時にローディングを表示
+// ⭐ Turboのフォーム送信開始時にローディングを表示
 document.addEventListener('turbo:submit-start', () => {
   showGummyLoading();
+  startMessageRotation();
 });
 
-// フォーム送信完了時にローディングを非表示
+// ⭐ Turboのフォーム送信完了時にローディングを非表示
 document.addEventListener('turbo:submit-end', () => {
   hideGummyLoading();
+  stopMessageRotation();
+});
+
+// render :new などでビューが再描画された時にローディングを非表示
+document.addEventListener('turbo:render', () => {
+  hideGummyLoading();
+  stopMessageRotation();
+});
+
+// ⭐ Turboのページ遷移開始時にローディングを表示
+document.addEventListener('turbo:before-fetch-request', () => {
+  showGummyLoading();
+  startMessageRotation();
+});
+
+// ⭐ Turboのページ読み込み完了時にローディングを非表示
+document.addEventListener('turbo:load', () => {
+  hideGummyLoading();
+  stopMessageRotation();
 });
 
 const loadingMessages = [
@@ -75,22 +70,17 @@ function getRandomMessage() {
   return loadingMessages[randomIndex];
 }
 
-// フェードアニメーション付きでメッセージを変更
 function changeMessageWithFade() {
   const loadingMessage = document.getElementById('loadingMessage');
 
   if (!loadingMessage) return;
 
-  // フェードアウト
   loadingMessage.style.opacity = '0';
 
   setTimeout(() => {
-    // メッセージを変更
     loadingMessage.textContent = getRandomMessage();
-
-    // フェードイン
     loadingMessage.style.opacity = '1';
-  }, 300); // 0.3秒後に変更
+  }, 300);
 }
 
 function startMessageRotation() {
@@ -98,21 +88,16 @@ function startMessageRotation() {
 
   if (!loadingMessage) return;
 
-  // ⭐ 既にインターバルが動いている場合は停止
   if (messageInterval) {
     clearInterval(messageInterval);
   }
 
-  // ⭐ 初回メッセージをランダムに設定
   loadingMessage.textContent = getRandomMessage();
 
-  // ⭐ 1.5秒後に最初のメッセージ変更を実行
   setTimeout(() => {
     changeMessageWithFade();
-    
-    // ⭐ その後は2.5秒ごとにメッセージを変更
     messageInterval = setInterval(changeMessageWithFade, 2500);
-  }, 1500); // 初回は1.5秒後に変更
+  }, 1500);
 }
 
 function stopMessageRotation() {
@@ -127,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('gummyLoadingOverlay');
   
   if (overlay) {
-    // hiddenクラスを削除してローディング画面を表示
     overlay.classList.remove('hidden');
     startMessageRotation();
   }
@@ -138,30 +122,9 @@ window.addEventListener('load', () => {
   const overlay = document.getElementById('gummyLoadingOverlay');
   
   if (overlay) {
-    // ⭐ 少し遅延させてから非表示にする(最低2回はメッセージ変更を見せるため)
     setTimeout(() => {
       overlay.classList.add('hidden');
       stopMessageRotation();
-    }, 4500); // 4.5秒後に非表示
-  }
-});
-
-// ⭐ Turboのページ遷移開始時にローディング画面を表示
-document.addEventListener('turbo:before-fetch-request', () => {
-  const overlay = document.getElementById('gummyLoadingOverlay');
-  
-  if (overlay) {
-    overlay.classList.remove('hidden');
-    startMessageRotation();
-  }
-});
-
-// ⭐ Turboのページ読み込み完了時にローディング画面を非表示
-document.addEventListener('turbo:load', () => {
-  const overlay = document.getElementById('gummyLoadingOverlay');
-  
-  if (overlay) {
-    overlay.classList.add('hidden');
-    stopMessageRotation();
+    }, 4500);
   }
 });
