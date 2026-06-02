@@ -71,7 +71,24 @@ class ReviewsController < ApplicationController
   def update
     @review = current_user.reviews.find(params[:id])
 
-    if @review.update(review_params)
+    # ⭐️ 新しい画像がアップロードされているかをチェック
+    new_photo_uploaded = params[:review][:photo_url].present? &&
+                         params[:review][:photo_url].is_a?(ActionDispatch::Http::UploadedFile)
+
+    if params[:review][:remove_photo_url] == '1' && !new_photo_uploaded
+      @review.remove_photo_url!
+    end
+
+      # ⭐️ 複数の新しいサブ画像を追加
+    if params[:review][:main_images_images].present?
+      params[:review][:main_images_images].compact_blank.each do |image|
+        @review.main_images.build(image: image)
+      end
+    end
+
+    # ⭐️ main_images_images を review_params から除外
+    review_update_params = review_params.except(:main_images_images, :remove_photo_url)
+    if @review.update(review_update_params)
       redirect_to review_path(@review), success: 'グミを更新しました!'
     else
       Rails.logger.debug "Review errors: #{@review.errors.full_messages}"
@@ -107,7 +124,8 @@ class ReviewsController < ApplicationController
       :gummy_name_kana,
       :flavor_kana,
       :remove_photo_url,
-      main_images_attributes: [:id, :image, :_destroy]
+      main_images_attributes: [:id, :image, :_destroy],
+      main_images_images: [] # ⭐️ 追加：サブ画像の配列を許可
       # ⭐️ main_images_attributes は削除
       # main_images_images は許可しない（別途処理する）
     )

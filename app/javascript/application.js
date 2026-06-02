@@ -128,3 +128,19 @@ window.addEventListener('load', () => {
     }, 4500);
   }
 });
+
+document.addEventListener('turbo:load', () => {
+  // 削除ボタンのイベントリスナー
+  document.querySelectorAll('.remove-image').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const imageItem = e.target.closest('.main-image-item');
+      const destroyFlag = imageItem.querySelector('.destroy-flag');
+      
+      // 削除マークをつける
+      destroyFlag.value = '1';
+      
+      // 非表示にする
+      imageItem.style.display = 'none';
+    });
+  });
+});
