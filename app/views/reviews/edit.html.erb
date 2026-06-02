@@ -1,7 +1,12 @@
 <% content_for :title, t('.title') %>
 <h1 class="title">🌟 レビュー編集 🌟</h1>
 
-<%= form_with model: @review, class: "review-form", enctype: "multipart/form-data", data: { controller: "image-resize" } do |f| %>
+<%= form_with model: @review,
+              url: review_path(@review),
+              method: :patch,
+              class: "review-form",
+              enctype: "multipart/form-data",
+              data: { controller: "image-resize" } do |f| %>
 
   <div class="form-group">
     <%= f.label :photo_url, "グミ画像（メイン１枚）" %>
@@ -30,35 +35,38 @@
   <div class="form-group">
     <label>他のグミたち(複数選択可)</label>
 
-    <!-- 既存のサブ画像を表示 -->
-    <% if @review.main_images.any? %>
-      <div class="mb-3">
-        <p>現在のサブ画像:</p>
-        <div class="row">
-          <% @review.main_images.each do |main_image| %>
-            <div class="col-md-3 mb-2">
-              <%= image_tag main_image.image.url, class: "img-thumbnail" %>
-              <%= f.fields_for :main_images, main_image do |img_f| %>
-                <div class="form-check">
-                  <%= img_f.check_box :_destroy, class: "form-check-input" %>
-                  <%= img_f.label :_destroy, "削除", class: "form-check-label" %>
-                </div>
+  <% if @review.main_images.any? %>
+    <div class="mb-3">
+      <p>現在のサブ画像:</p>
+      <div class="row" id="main-images-container">
+        <%= f.fields_for :main_images do |img_f| %>
+          <% unless img_f.object.marked_for_destruction? %>
+            <div class="col-md-3 mb-2 main-image-item" data-main-image-id="<%= img_f.object.id %>">
+              <% if img_f.object.image.present? %>
+                <%= image_tag img_f.object.image.url, class: "img-thumbnail" %>
               <% end %>
+              <%= img_f.hidden_field :id %>
+              <%= img_f.hidden_field :_destroy, value: '0', class: 'destroy-flag' %>
+              <div class="form-check">
+                <button type="button" class="btn btn-danger btn-sm remove-image">削除</button>
+              </div>
             </div>
           <% end %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+  <% end %>
 
-    <!-- 新しいサブ画像をアップロード -->
-    <input type="file"
-           name="review[main_images_attributes][][image]"
-           id="sub_images"
-           class="form-control"
-           multiple
-           accept="image/*"
-           data-image-resize-target="sub"
-           data-action="change->image-resize#resizeSub">
+      <!-- ⭐️ 新しいサブ画像をアップロード（修正版） -->
+  <div class="mb-2">
+    <%= f.file_field :main_images_images,
+          class: 'form-control',
+          multiple: true,
+          accept: 'image/*',
+          data: {
+            image_resize_target: "sub",
+            action: "change->image-resize#resizeSub"
+          } %>
   </div>
 
   <div class="form-group">

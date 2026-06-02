@@ -1,6 +1,6 @@
 class MainImage < ApplicationRecord
   belongs_to :review
-  mount_uploader :image, PhotoUploader
+  mount_uploader :image, AvatarUploader
 
     # ⭐️ image= メソッドをオーバーライド
   def image=(value)

@@ -29620,6 +29620,16 @@
       }, 4500);
     }
   });
+  document.addEventListener("turbo:load", () => {
+    document.querySelectorAll(".remove-image").forEach((button) => {
+      button.addEventListener("click", (e2) => {
+        const imageItem = e2.target.closest(".main-image-item");
+        const destroyFlag = imageItem.querySelector(".destroy-flag");
+        destroyFlag.value = "1";
+        imageItem.style.display = "none";
+      });
+    });
+  });
 })();
 /*! Bundled license information:
 
