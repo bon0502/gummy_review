@@ -6,6 +6,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+        <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F47JGWQ7G9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-F47JGWQ7G9');
+    </script>
+
     <%# ⭐ faviconの設定 %>
     <%= favicon_link_tag 'akakuma.png' %>
 
