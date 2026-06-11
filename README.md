@@ -1,24 +1,51 @@
-# README
+#　GummyReview
+グミ好きのためのレビュー共有アプリです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+`「このグミ美味しかった！」` 
 
-Things you may want to cover:
+`「こういうグミはないのかな？」`
 
-* Ruby version
+グミ好き同士がレビューを投稿・共有し、新しいグミとの出会いを楽しめるサービスです。
 
-* System dependencies
+### 1. サービスの概要
 
-* Configuration
+GummyReviewは、グミのレビューを投稿・閲覧できるWebアプリです。
 
-* Database creation
+自分が食べたグミの感想をレビューとして投稿し、他のユーザーの評価やレビューを参考にしながらお気に入りのグミを見つけることができます。
 
-* Database initialization
+### 2. 主な機能
+#### ユーザー機能
+* ユーザー登録
+* ログイン / ログアウト(Googleログイン)
+* プロフィール編集
 
-* How to run the test suite
+#### グミレビュー
+* グミレビュー投稿(画像付き投稿可)
+* グミレビュー再編集・削除
+* お気に入り登録(いいね)
+* コメント機能
 
-* Services (job queues, cache servers, search engines, etc.)
+#### ランキング機能
+* 月間レビュー投稿数ランキング
+* いいねランキング
 
-* Deployment instructions
+#### レベル・称号システム
+* 投稿数に応じたレベルアップ
+* 活動内容による称号獲得
+* ユーザーごとに今月食べたグミの分析
 
-* ...
+#### 検索機能
+* グミ名検索
+* 好みの味検索
+
+### 3. 開発背景
+　コンビニやスーパーに行くと昔に比べてお菓子のガムコーナーより、グミコーナーの方が売り場が広くなっているなと感じました。
+自分自身グミが好きで毎月のように購入しています。毎月グミは新作が10〜20個出ているそうです。
+たくさん出ているのに、「グミをレビューするアプリ」ってあまり見かけないように感じました。
+たくさんあってどのグミにしようか悩んでいる人、新たな出会い（グミ）ができるグミ好きさんたちのためのグミレビューアプリを作りたいと考えました。
+
+### 4. 使用技術
+* Ruby
+* CSS
+* JavaScript
+* SQL
